@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+
+# Exclude development and utility files/directories
+Disallow: /dist/
+Disallow: /node_modules/
+Disallow: /.git/
+Disallow: /.github/
+Disallow: /.nuxt/
+Disallow: /.env
+Disallow: /.gitignore
+
+# Sitemap
+Sitemap: https://fabienlubin.fr/sitemap.xml

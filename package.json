@@ -1,0 +1,24 @@
+{
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview"
+  },
+  "devDependencies": {
+    "@nuxtjs/tailwindcss": "^6.x.x",
+    "@tailwindcss/aspect-ratio": "^0.4.2",
+    "@tailwindcss/forms": "^0.5.10",
+    "@tailwindcss/typography": "^0.5.16",
+    "@vueuse/motion": "^2.2.6",
+    "nuxt": "^3.x.x"
+  },
+  "dependencies": {
+    "@nuxtjs/robots": "^5.2.2",
+    "@vueuse/core": "^12.5.0",
+    "nodemailer": "^6.10.0",
+    "nuxt-icon": "^1.0.0-beta.7",
+    "nuxt-simple-sitemap": "^4.4.1"
+  }
+}
