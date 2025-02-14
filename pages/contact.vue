@@ -81,7 +81,6 @@
         </div>
 
         <!-- Informations de contact -->
-        <!-- Remplace le bloc d'informations de contact par ceci -->
         <div
             v-motion
             :initial="{ opacity: 0, x: 50 }"

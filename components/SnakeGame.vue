@@ -2,7 +2,7 @@
   <div class="relative w-full h-full bg-black">
     <canvas
         ref="gameCanvas"
-        class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+        class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border border-gray-700"
         :width="canvasWidth"
         :height="canvasHeight"
     ></canvas>
@@ -15,7 +15,7 @@
     <!-- Game Over -->
     <div v-if="gameOver" class="absolute inset-0 flex items-center justify-center bg-black/80">
       <div class="text-center">
-        <p class="text-red-500 text-2xl font-bold mb-4">Game Over!</p>
+        <p class="text-red-500 text-2xl font-bold mb-4">GAME OVER !</p>
         <button
             @click="startGame"
             class="px-4 py-2 bg-green-500 text-black rounded hover:bg-green-400"
@@ -30,9 +30,15 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 
+// Constantes du jeu
 const canvasWidth = 400
 const canvasHeight = 400
 const gridSize = 20
+const boardWidth = canvasWidth / gridSize
+const boardHeight = canvasHeight / gridSize
+const gameSpeed = ref(150)
+
+// Refs
 const gameCanvas = ref(null)
 const ctx = ref(null)
 const snake = ref([])
@@ -42,6 +48,7 @@ const gameLoop = ref(null)
 const score = ref(0)
 const gameOver = ref(false)
 
+// Démarrage du jeu
 const startGame = () => {
   snake.value = [
     { x: 3, y: 1 },
@@ -53,16 +60,29 @@ const startGame = () => {
   gameOver.value = false
   spawnFood()
   if (gameLoop.value) clearInterval(gameLoop.value)
-  gameLoop.value = setInterval(update, 100)
+  gameLoop.value = setInterval(update, gameSpeed.value)
 }
 
+// Spawn de la nourriture (corrigé pour rester dans les limites)
 const spawnFood = () => {
-  food.value = {
-    x: Math.floor(Math.random() * (canvasWidth / gridSize)),
-    y: Math.floor(Math.random() * (canvasHeight / gridSize))
+  const availableSpots = []
+
+  // Créer une liste de toutes les positions disponibles
+  for (let x = 0; x < boardWidth; x++) {
+    for (let y = 0; y < boardHeight; y++) {
+      // Vérifier si la position n'est pas occupée par le serpent
+      if (!snake.value.some(segment => segment.x === x && segment.y === y)) {
+        availableSpots.push({ x, y })
+      }
+    }
   }
+
+  // Choisir une position aléatoire parmi les disponibles
+  const randomIndex = Math.floor(Math.random() * availableSpots.length)
+  food.value = availableSpots[randomIndex]
 }
 
+// Mise à jour du jeu
 const update = () => {
   const head = { ...snake.value[0] }
 
@@ -73,9 +93,8 @@ const update = () => {
     case 'right': head.x++; break
   }
 
-  // Collision avec les murs
-  if (head.x < 0 || head.x >= canvasWidth / gridSize ||
-      head.y < 0 || head.y >= canvasHeight / gridSize) {
+  // Collision avec les murs (maintenant visuellement cohérent avec les bordures)
+  if (head.x < 0 || head.x >= boardWidth || head.y < 0 || head.y >= boardHeight) {
     endGame()
     return
   }
@@ -99,6 +118,7 @@ const update = () => {
   draw()
 }
 
+// Dessin amélioré avec grille et bordures
 const draw = () => {
   if (!ctx.value) return
 
@@ -106,25 +126,44 @@ const draw = () => {
   ctx.value.fillStyle = 'black'
   ctx.value.fillRect(0, 0, canvasWidth, canvasHeight)
 
-  // Dessiner le serpent
-  ctx.value.fillStyle = '#00ff00'
-  snake.value.forEach(segment => {
+  // Dessiner la grille (optionnel, pour le débogage)
+  ctx.value.strokeStyle = '#1a1a1a'
+  for (let x = 0; x < canvasWidth; x += gridSize) {
+    ctx.value.beginPath()
+    ctx.value.moveTo(x, 0)
+    ctx.value.lineTo(x, canvasHeight)
+    ctx.value.stroke()
+  }
+  for (let y = 0; y < canvasHeight; y += gridSize) {
+    ctx.value.beginPath()
+    ctx.value.moveTo(0, y)
+    ctx.value.lineTo(canvasWidth, y)
+    ctx.value.stroke()
+  }
+
+  // Dessiner le serpent avec effet de gradient
+  snake.value.forEach((segment, index) => {
+    const greenValue = Math.floor(255 * (1 - index / snake.value.length))
+    ctx.value.fillStyle = `rgb(0, ${greenValue}, 0)`
     ctx.value.fillRect(
-        segment.x * gridSize,
-        segment.y * gridSize,
-        gridSize - 1,
-        gridSize - 1
+        segment.x * gridSize + 1,
+        segment.y * gridSize + 1,
+        gridSize - 2,
+        gridSize - 2
     )
   })
 
-  // Dessiner la nourriture
+  // Dessiner la nourriture avec un effet de brillance
   ctx.value.fillStyle = 'red'
-  ctx.value.fillRect(
-      food.value.x * gridSize,
-      food.value.y * gridSize,
-      gridSize - 1,
-      gridSize - 1
+  ctx.value.beginPath()
+  ctx.value.arc(
+      food.value.x * gridSize + gridSize/2,
+      food.value.y * gridSize + gridSize/2,
+      gridSize/3,
+      0,
+      Math.PI * 2
   )
+  ctx.value.fill()
 }
 
 const handleKeydown = (e) => {
