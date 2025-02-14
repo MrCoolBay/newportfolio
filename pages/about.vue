@@ -134,21 +134,21 @@
       </div>
 
       <!-- Bouton CV -->
-      <div
-          v-motion
-          :initial="{ opacity: 0, y: 20 }"
-          :enter="{ opacity: 1, y: 0, transition: { delay: 600 } }"
-          class="mt-16 text-center"
-      >
-        <a
-            href="/cv.pdf"
-            target="_blank"
-            class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:scale-105 transition-transform"
-        >
-          <span>Consulter mon CV</span>
-          <Icon name="heroicons:arrow-right" class="w-5 h-5" />
-        </a>
-      </div>
+<!--      <div-->
+<!--          v-motion-->
+<!--          :initial="{ opacity: 0, y: 20 }"-->
+<!--          :enter="{ opacity: 1, y: 0, transition: { delay: 600 } }"-->
+<!--          class="mt-16 text-center"-->
+<!--      >-->
+<!--        <a-->
+<!--            href="/cv.pdf"-->
+<!--            target="_blank"-->
+<!--            class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:scale-105 transition-transform"-->
+<!--        >-->
+<!--          <span>Consulter mon CV</span>-->
+<!--          <Icon name="heroicons:arrow-right" class="w-5 h-5" />-->
+<!--        </a>-->
+<!--      </div>-->
     </div>
   </main>
 </template>
