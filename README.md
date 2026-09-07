@@ -1,75 +1,100 @@
-# Nuxt Minimal Starter
+# Portfolio — fabienlubin.fr
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Portfolio personnel construit avec **Nuxt 4**, **Vue 3** et **Tailwind CSS 4**.
 
-## Setup
+## Prérequis
 
-Make sure to install dependencies:
+Node **22.19+**, **24.11+** ou **26+** (plage supportée par Nuxt 4.5). Un `.nvmrc`
+est fourni :
 
 ```bash
-# npm
+nvm use
+```
+
+> Node 23 et 25 (versions impaires, non LTS) sont hors de la plage supportée.
+
+## Installation
+
+```bash
+nvm use
 npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
+cp .env.example .env   # puis renseigner NUXT_SMTP_PASS
 ```
 
-## Development Server
+## Scripts
 
-Start the development server on `http://localhost:3000`:
+| Commande            | Rôle                                              |
+| ------------------- | ------------------------------------------------- |
+| `npm run dev`       | Serveur de développement sur `http://localhost:3000` |
+| `npm run build`     | Build de production dans `.output/`               |
+| `npm run preview`   | Prévisualisation du build de production           |
+| `npm run generate`  | Génération statique                               |
+| `npm run lint`      | ESLint (config Nuxt)                              |
+| `npm run lint:fix`  | ESLint avec correction automatique                |
+| `npm run typecheck` | Vérification des types (`vue-tsc`)                |
+| `npm run audit`     | Audit des dépendances (échoue dès `moderate`)     |
 
-```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
-```
-
-## Production
-
-Build the application for production:
+Lancer le build de production :
 
 ```bash
-# npm
 npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
+node .output/server/index.mjs
 ```
 
-Locally preview production build:
+## Structure
+
+Arborescence Nuxt 4 : le code applicatif vit sous `app/`, le code serveur reste
+à la racine.
+
+```
+app/
+  app.vue            racine de l'application
+  error.vue          page d'erreur (404/500/…)
+  assets/css/        point d'entrée Tailwind
+  components/        composants auto-importés
+  layouts/           layouts
+  pages/             routes basées sur les fichiers
+server/
+  api/               endpoints Nitro
+  plugins/           plugins Nitro
+  utils/             utilitaires serveur auto-importés
+public/              fichiers servis tels quels
+```
+
+## Variables d'environnement
+
+Voir `.env.example`. Toutes les clés `NUXT_SMTP_*` sont **serveur uniquement**
+et n'apparaissent jamais dans le bundle client.
+
+| Variable               | Rôle                                     |
+| ---------------------- | ---------------------------------------- |
+| `NUXT_PUBLIC_SITE_URL` | URL canonique (sitemap, robots, meta OG) |
+| `NUXT_SMTP_HOST`       | Hôte SMTP                                |
+| `NUXT_SMTP_PORT`       | Port SMTP (587 STARTTLS, 465 TLS direct) |
+| `NUXT_SMTP_USER`       | Compte SMTP authentifié                  |
+| `NUXT_SMTP_PASS`       | Mot de passe SMTP (**secret**)           |
+| `NUXT_SMTP_TO`         | Destinataire du formulaire de contact    |
+
+L'ancien nom `SMTP_PASS` reste accepté en secours pour ne pas casser un
+déploiement existant, mais `NUXT_SMTP_PASS` doit être préféré.
+
+## Sécurité
+
+Les protections en place sont documentées dans `SECURITY.md`.
+
+## Agents de code
+
+`AGENTS.md` est la source de vérité des conventions du projet, tous outils
+confondus. `CLAUDE.md`, `GEMINI.md`, `.github/copilot-instructions.md` et
+`.cursor/rules/project.mdc` en sont **générés** — ne pas les éditer :
 
 ```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
+node .claude/tools/sync-agent-docs.mjs           # régénère
+node .claude/tools/sync-agent-docs.mjs --check   # échoue si périmé
 ```
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+Revue croisée multi-modèles (Claude, Gemini, GPT, Grok, OpenRouter, Ollama) :
+
+```bash
+node .claude/tools/ai-council.mjs --status
+```
