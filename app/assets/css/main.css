@@ -1,0 +1,6 @@
+@import "tailwindcss";
+
+/* Seul plugin réellement utilisé : il normalise le rendu des champs du
+   formulaire de contact. `typography` et `aspect-ratio` ont été retirés
+   (aucune classe `prose` dans le projet, `aspect-*` est natif en Tailwind 4). */
+@plugin "@tailwindcss/forms";

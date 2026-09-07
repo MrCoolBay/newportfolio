@@ -5,7 +5,7 @@
       :class="{ 'fade-out': isFading }"
   >
     <div class="font-mono text-4xl md:text-6xl font-bold">
-      <span class="bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent">
+      <span class="bg-linear-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent">
         /{{ displayedText }}<span class="animate-blink">|</span>
       </span>
     </div>
@@ -62,7 +62,16 @@ onUnmounted(() => {
 <style scoped>
 .animate-blink {
   animation: blink 1s step-end infinite;
-  @apply bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent;
+  /* Tailwind 4 : `@apply` dans un <style> de SFC exigerait une directive
+     `@reference` (re-parse de la feuille a chaque bloc). Les variables du
+     theme sont exposees sur :root, autant les utiliser directement. */
+  background-image: linear-gradient(
+    to right,
+    var(--color-blue-500),
+    var(--color-purple-600)
+  );
+  background-clip: text;
+  color: transparent;
 }
 
 @keyframes blink {

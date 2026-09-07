@@ -4,14 +4,14 @@
       <!-- En-tête stylisé -->
       <div class="mb-16 max-w-7xl mx-auto px-4">
         <div class="flex items-baseline gap-4">
-          <h2 class="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+          <h2 class="text-3xl font-bold bg-linear-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
             A propos
           </h2>
           <div class="font-mono text-gray-400 text-sm">
             <span class="text-pink-600">import</span> { about } <span class="text-pink-600">from</span> <span class="text-green-600">'./me'</span>
           </div>
         </div>
-        <div class="mt-2 h-px w-full bg-gradient-to-r from-blue-600/50 to-purple-600/50"></div>
+        <div class="mt-2 h-px w-full bg-linear-to-r from-blue-600/50 to-purple-600/50"/>
       </div>
 
       <!-- Section principale -->
@@ -26,8 +26,8 @@
               :duration="500"
               class="relative"
           >
-            <div class="absolute -left-4 top-0 bottom-0 w-px bg-gradient-to-b from-blue-600 to-purple-600"></div>
-            <h2 class="text-2xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            <div class="absolute -left-4 top-0 bottom-0 w-px bg-linear-to-b from-blue-600 to-purple-600"/>
+            <h2 class="text-2xl font-bold mb-6 bg-linear-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
               console.log("L'informatique est ma passion");
             </h2>
             <p class="text-gray-600 leading-relaxed">
@@ -44,12 +44,12 @@
               :duration="500"
               class="relative"
           >
-            <div class="absolute -left-4 top-0 bottom-0 w-px bg-gradient-to-b from-blue-600 to-purple-600"></div>
+            <div class="absolute -left-4 top-0 bottom-0 w-px bg-linear-to-b from-blue-600 to-purple-600"/>
             <div class="bg-[#1E1E1E] rounded-lg p-6">
               <div class="flex items-center gap-2 mb-4">
-                <div class="w-3 h-3 rounded-full bg-red-500"></div>
-                <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
-                <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                <div class="w-3 h-3 rounded-full bg-red-500"/>
+                <div class="w-3 h-3 rounded-full bg-yellow-500"/>
+                <div class="w-3 h-3 rounded-full bg-green-500"/>
               </div>
               <code class="block text-sm text-white leading-relaxed">
                 <span class="text-pink-400">const</span> <span class="text-blue-400">formation</span> = {<br>
@@ -73,9 +73,9 @@
           <!-- Terminal avec expérience -->
           <div class="bg-[#1E1E1E] rounded-lg overflow-hidden shadow-xl">
             <div class="flex items-center gap-2 p-4 bg-gray-800">
-              <div class="w-3 h-3 rounded-full bg-red-500"></div>
-              <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
-              <div class="w-3 h-3 rounded-full bg-green-500"></div>
+              <div class="w-3 h-3 rounded-full bg-red-500"/>
+              <div class="w-3 h-3 rounded-full bg-yellow-500"/>
+              <div class="w-3 h-3 rounded-full bg-green-500"/>
               <span class="ml-2 text-sm text-gray-400">terminal</span>
             </div>
 
@@ -86,19 +86,19 @@
               </div>
               <div class="pl-4 space-y-2">
                 <div class="flex items-center gap-2">
-                  <div class="w-2 h-2 rounded-full bg-green-500"></div>
+                  <div class="w-2 h-2 rounded-full bg-green-500"/>
                   <span class="text-gray-300">HTML5, CSS3, JavaScript</span>
                 </div>
                 <div class="flex items-center gap-2">
-                  <div class="w-2 h-2 rounded-full bg-green-500"></div>
+                  <div class="w-2 h-2 rounded-full bg-green-500"/>
                   <span class="text-gray-300">Vue.js, Nuxt.js</span>
                 </div>
                 <div class="flex items-center gap-2">
-                  <div class="w-2 h-2 rounded-full bg-yellow-500"></div>
+                  <div class="w-2 h-2 rounded-full bg-yellow-500"/>
                   <span class="text-gray-300">PHP, Python (Flask, FastAPI)</span>
                 </div>
                 <div class="flex items-center gap-2">
-                  <div class="w-2 h-2 rounded-full bg-blue-500"></div>
+                  <div class="w-2 h-2 rounded-full bg-blue-500"/>
                   <span class="text-gray-300">Linux, Windows Administration</span>
                 </div>
               </div>
@@ -107,15 +107,15 @@
                 <span class="text-green-400">➜</span> <span class="text-blue-400">experience</span> --show
               </div>
               <div class="pl-4 text-gray-300">
-                # Alternance chez Agreego (Depuis Janvier 2025)<br/>
-                • Développement Angular<br/>
-                • Création d'APIs avec Node.js<br/>
+                # Alternance chez Agreego (Depuis Janvier 2025)<br>
+                • Développement Angular<br>
+                • Création d'APIs avec Node.js<br>
                 • Gestion de projets full-stack
               </div>
               <div class="pl-4 text-gray-300">
-                # Stage chez HK-Tech (Juillet - Août 2024)<br/>
-                • Développement Vue.js/Nuxt<br/>
-                • Création d'APIs avec FastAPI<br/>
+                # Stage chez HK-Tech (Juillet - Août 2024)<br>
+                • Développement Vue.js/Nuxt<br>
+                • Création d'APIs avec FastAPI<br>
                 • Gestion de projets full-stack
               </div>
             </div>
@@ -123,7 +123,7 @@
 
           <!-- Compteur d'années stylisé -->
           <div
-              class="absolute -right-8 -bottom-8 w-32 h-32 bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center text-white transform rotate-3 shadow-xl"
+              class="absolute -right-8 -bottom-8 w-32 h-32 bg-linear-to-br from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center text-white transform rotate-3 shadow-xl"
           >
             <div class="text-center">
               <div class="text-4xl font-bold">5</div>
@@ -143,7 +143,7 @@
 <!--        <a-->
 <!--            href="/cv.pdf"-->
 <!--            target="_blank"-->
-<!--            class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:scale-105 transition-transform"-->
+<!--            class="inline-flex items-center gap-2 px-6 py-3 bg-linear-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:scale-105 transition-transform"-->
 <!--        >-->
 <!--          <span>Consulter mon CV</span>-->
 <!--          <Icon name="heroicons:arrow-right" class="w-5 h-5" />-->

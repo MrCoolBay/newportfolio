@@ -9,17 +9,17 @@
             :style="{
             background: `radial-gradient(circle at ${mouseX}px ${mouseY}px, rgb(37, 99, 235), transparent 25%)`
           }"
-        ></div>
+        />
 
         <!-- Contenu principal -->
         <div class="relative grid grid-cols-1 md:grid-cols-3 gap-12">
           <!-- Logo et description -->
           <div class="space-y-4">
-            <NuxtLink to="/" class="inline-block text-xl font-bold bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent">
+            <NuxtLink to="/" class="inline-block text-xl font-bold bg-linear-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent">
               /FabienLubin>
             </NuxtLink>
             <p class="text-gray-600 font-mono">
-              // Full Stack Developer<br/>
+              // Full Stack Developer<br>
               // Passionné par le web
             </p>
           </div>

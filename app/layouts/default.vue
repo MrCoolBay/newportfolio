@@ -7,7 +7,7 @@
     </header>
 
     <!-- Contenu principal avec padding pour éviter le chevauchement avec la navbar -->
-    <main class="flex-grow pt-24 px-4 sm:px-6 lg:px-8">
+    <main class="grow pt-24 px-4 sm:px-6 lg:px-8">
       <!-- Slot pour le contenu des pages -->
       <slot />
     </main>

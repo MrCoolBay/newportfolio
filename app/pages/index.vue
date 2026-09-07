@@ -11,7 +11,7 @@
     <div class="container mx-auto">
       <section class="min-h-screen relative flex -mb-30">
         <!-- Zone de code interactive -->
-        <div class="flex-grow flex flex-col lg:flex-row items-start gap-8 pt-32 px-4 lg:px-16">
+        <div class="grow flex flex-col lg:flex-row items-start gap-8 pt-32 px-4 lg:px-16">
           <!-- Conteneur pour le jeu et l'éditeur -->
           <div class="lg:w-1/2 relative">
             <!-- Jeu Snake en arrière-plan -->
@@ -19,7 +19,7 @@
                 class="absolute inset-0 overflow-hidden rounded-lg transition-opacity duration-500 bg-[#1E1E1E]"
                 :class="{'opacity-100 z-10': showSnake, 'opacity-0 -z-10': !showSnake}"
             >
-              <SnakeGame ref="snakeGame" v-if="showSnake" />
+              <SnakeGame v-if="showSnake" ref="snakeGame" />
             </div>
 
             <!-- Éditeur de code avec animation -->
@@ -31,8 +31,9 @@
                 }"
                 @click="isMinimized ? restoreWindow() : null"
             >
-              <div class="bg-[#1E1E1E] rounded-lg overflow-hidden shadow-xl"
-                   v-motion
+              <div
+v-motion
+                   class="bg-[#1E1E1E] rounded-lg overflow-hidden shadow-xl"
                    :initial="{ opacity: 0, y: 20 }"
                    :enter="{ opacity: 1, y: 0, transition: { delay: 200 } }"
                    :duration="1000"
@@ -40,14 +41,14 @@
                 <!-- Barre de titre -->
                 <div class="flex items-center gap-2 p-4 bg-[#1A1A1A]">
                   <button
-                      class="w-3 h-3 rounded-full bg-red-500 hover:bg-red-600 transition-colors"
+                      class="cursor-pointer w-3 h-3 rounded-full bg-red-500 hover:bg-red-600 transition-colors"
                       @click="toggleMinimize"
-                  ></button>
+                  />
                   <button
-                      class="w-3 h-3 rounded-full bg-yellow-500 hover:bg-yellow-600 transition-colors"
+                      class="cursor-pointer w-3 h-3 rounded-full bg-yellow-500 hover:bg-yellow-600 transition-colors"
                       @click="toggleMinimize"
-                  ></button>
-                  <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                  />
+                  <div class="w-3 h-3 rounded-full bg-green-500"/>
                 </div>
 
                 <!-- Contenu de l'éditeur -->
@@ -95,7 +96,7 @@
                     <div class="space-y-3">
                       <NuxtLink
                           to="/projects"
-                          class="flex items-center gap-2 hover:bg-white/5 p-2 rounded transition-colors"
+                          class="flex items-center gap-2 hover:bg-white/5 p-2 rounded-sm transition-colors"
                       >
                         <span class="text-gray-500">$</span>
                         <span class="text-blue-400">npm run</span>
@@ -104,7 +105,7 @@
 
                       <NuxtLink
                           to="/contact"
-                          class="flex items-center gap-2 hover:bg-white/5 p-2 rounded transition-colors"
+                          class="flex items-center gap-2 hover:bg-white/5 p-2 rounded-sm transition-colors"
                       >
                         <span class="text-gray-500">$</span>
                         <span class="text-blue-400">npm run</span>
@@ -122,16 +123,18 @@
 
           >
             <h1 class="space-y-4">
-             <span class="block text-4xl lg:text-6xl font-bold text-gray-800"
-                   v-motion
+             <span
+v-motion
+                   class="block text-4xl lg:text-6xl font-bold text-gray-800"
                    :initial="{ opacity: 0, x: 50 }"
                    :enter="{ opacity: 1, x: 0, transition: { delay: 200 } }"
                    :duration="1000"
              >
                Je suis
              </span>
-              <span class="block text-5xl lg:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600"
-                    v-motion
+              <span
+v-motion
+                    class="block text-5xl lg:text-7xl font-bold text-transparent bg-clip-text bg-linear-to-r from-blue-600 to-purple-600"
                     :initial="{ opacity: 0, x: 50 }"
                     :enter="{ opacity: 1, x: 0, transition: { delay: 400 } }"
                     :duration="1000"
@@ -140,8 +143,9 @@
              </span>
             </h1>
 
-            <p class="mt-6 text-lg text-gray-600 max-w-lg"
-               v-motion
+            <p
+v-motion
+               class="mt-6 text-lg text-gray-600 max-w-lg"
                :initial="{ opacity: 0, x: 50,  }"
                :enter="{ opacity: 1, x: 0, transition: { delay: 600 } }"
                :duration="1000"
