@@ -15,16 +15,22 @@ pas de base de données. La seule surface d'écriture est `POST /api/contact`.
 ## Avant toute commande
 
 ```bash
-nvm use    # Node 22 LTS via .nvmrc
+nvm use    # Node 24 LTS via .nvmrc
 ```
 
-Deux pièges d'environnement, tous deux déjà rencontrés sur cette machine :
+**Un seul runtime : Node 24.** C'est celui que sert Vercel en production, donc
+`.nvmrc` et `engines.node` s'y tiennent. Cette égalité dev/prod n'est pas
+cosmétique : deux bugs de ce projet venaient d'un décalage de version de Node.
 
-- **Node impair (23, 25) ne marche pas.** Nuxt 4.5 exige
-  `^22.19.0 || ^24.11.0 || >=26.0.0`. Le Node par défaut de cette machine
-  (25.x) est hors plage.
+Pièges déjà rencontrés :
+
+- **Node impair (23, 25) ne marche pas** — ces versions ne sont pas LTS et sont
+  hors de la plage supportée par Nuxt. Le Node par défaut de cette machine
+  (25.x) en fait partie : toujours `nvm use` avant npm ou nuxt.
+- **Node 22 n'est plus supporté ici.** Il fonctionne techniquement avec Nuxt,
+  mais la production est en 24 et on ne maintient pas deux runtimes.
 - **npm 10.9.x échoue** sur `npm install` (`Cannot read properties of null
-  (reading 'edgesOut')`, bug arborist). npm >= 11 requis.
+  (reading 'edgesOut')`, bug arborist). npm >= 11 requis — Node 24 l'embarque.
 
 ## Commandes
 
@@ -35,7 +41,7 @@ Deux pièges d'environnement, tous deux déjà rencontrés sur cette machine :
 | `npm run lint` / `npm run lint:fix` | ESLint |
 | `npm run typecheck` | `vue-tsc` |
 | `npm audit` | référence : **`found 0 vulnerabilities`** |
-| `.claude/skills/security-audit/run.sh` | 71 contrôles de sécurité, référence **71 PASS / 0 FAIL** |
+| `.claude/skills/security-audit/run.sh` | 72 contrôles de sécurité, référence **72 PASS / 0 FAIL** |
 | `node .claude/tools/ai-council.mjs --status` | revue croisée multi-modèles |
 | `node .claude/tools/sync-agent-docs.mjs --check` | vérifie que les fichiers dérivés sont à jour |
 
@@ -128,6 +134,16 @@ Interface et commentaires de code en **français**, accents inclus. Esthétique
 « terminal » : conteneurs `bg-[#1E1E1E] rounded-xl overflow-hidden` avec barre
 à trois pastilles, dégradés bleu→violet, animations `v-motion`
 (`@vueuse/motion`).
+
+## Git
+
+**Aucun trailer `Co-Authored-By` dans les messages de commit.** Le propriétaire
+du dépôt n'en veut pas dans son historique, sans exception — y compris pour un
+co-auteur d'agent. Le hook `.claude/hooks/commit-policy.mjs` refuse toute
+commande `git commit`, `git merge`, `git tag -a` ou `gh pr create` dont le
+message en contient un.
+
+Ne committer et ne pousser que sur demande explicite.
 
 ## Attentes de restitution
 

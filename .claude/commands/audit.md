@@ -1,5 +1,5 @@
 ---
-description: Chaîne de vérification complète — lint, types, CVE, build, puis les 71 contrôles de sécurité
+description: Chaîne de vérification complète — lint, types, CVE, build, puis les 72 contrôles de sécurité
 argument-hint: "[rapide]"
 ---
 
@@ -22,7 +22,7 @@ nvm use
 4. `npm audit` — la référence est `found 0 vulnerabilities`. Toute
    vulnérabilité est un échec, pas un avertissement.
 5. `npm run build`
-6. `.claude/skills/security-audit/run.sh` — la référence est `71 PASS / 0 FAIL`.
+6. `.claude/skills/security-audit/run.sh` — la référence est `72 PASS / 0 FAIL`.
 
 Sur échec à l'étape 6, avant de conclure à une régression, écarte les deux faux
 positifs connus (documentés dans le skill `security-audit`) :

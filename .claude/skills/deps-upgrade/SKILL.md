@@ -34,7 +34,7 @@ npm audit                          # référence : "found 0 vulnerabilities"
 npm install <pkg>@<version>
 npm run lint && npm run typecheck && npm run build
 npm audit                          # doit toujours dire 0
-.claude/skills/security-audit/run.sh   # 71 PASS / 0 FAIL
+.claude/skills/security-audit/run.sh   # 72 PASS / 0 FAIL
 ```
 
 Le hook `audit-deps` relance automatiquement `npm audit` dès que

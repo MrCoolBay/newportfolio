@@ -46,7 +46,7 @@ Node impair (23, 25) est hors de la plage supportée par Nuxt 4.5
 ```bash
 npm run lint && npm run typecheck && npm run build
 npm audit                                # doit dire "found 0 vulnerabilities"
-.claude/skills/security-audit/run.sh     # 71 PASS / 0 FAIL
+.claude/skills/security-audit/run.sh     # 72 PASS / 0 FAIL
 ```
 
 Un build qui passe ne suffit pas : Tailwind 4 casse des classes **sans aucun

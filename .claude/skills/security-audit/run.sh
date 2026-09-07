@@ -2,7 +2,7 @@
 # Campagne de tests de sécurité contre un build de PRODUCTION.
 #
 # Monte un relais SMTP factice local, pointe l'application dessus, lance les
-# 71 contrôles, puis inspecte le trafic SMTP brut. Aucun mail ne part vers une
+# 72 contrôles, puis inspecte le trafic SMTP brut. Aucun mail ne part vers une
 # vraie boîte : le destinataire réel n'est jamais contacté.
 set -euo pipefail
 
