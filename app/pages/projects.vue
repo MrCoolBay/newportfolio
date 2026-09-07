@@ -4,19 +4,19 @@
       <!-- Import stylisé -->
       <div class="mb-16 max-w-7xl mx-auto px-4">
         <div class="flex items-baseline gap-4">
-          <h2 class="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+          <h2 class="text-3xl font-bold bg-linear-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
             Projets
           </h2>
           <div class="font-mono text-gray-400 text-sm">
             <span class="text-pink-600">import</span> { projects } <span class="text-pink-600">from</span> <span class="text-green-600">'./me'</span>
           </div>
         </div>
-        <div class="mt-2 h-px w-full bg-gradient-to-r from-blue-600/50 to-purple-600/50"></div>
+        <div class="mt-2 h-px w-full bg-linear-to-r from-blue-600/50 to-purple-600/50"/>
       </div>
 
       <!-- Titre principal -->
       <div class="space-y-8 mb-16">
-        <h1 class="text-[2.5rem] font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
+        <h1 class="text-[2.5rem] font-bold text-transparent bg-clip-text bg-linear-to-r from-blue-600 to-purple-600">
           projects.map((project) => project.show());
         </h1>
       </div>
@@ -33,11 +33,12 @@
         >
           <div class="bg-[#1E1E1E] rounded-xl overflow-hidden">
             <div class="flex items-center gap-2 px-4 py-3 bg-gray-800/50">
-              <div class="w-3 h-3 rounded-full bg-red-500"></div>
-              <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
-              <div class="w-3 h-3 rounded-full bg-green-500 hover:bg-green-700 transition-colors"
+              <div class="w-3 h-3 rounded-full bg-red-500"/>
+              <div class="w-3 h-3 rounded-full bg-yellow-500"/>
+              <div
+class="w-3 h-3 rounded-full bg-green-500 hover:bg-green-700 transition-colors"
                    @click="openUrl('https://mercuriarp.fr')"
-              ></div>
+              />
               <span class="ml-2 text-sm text-gray-400">mercuriarp.fr</span>
             </div>
 
@@ -47,8 +48,8 @@
                   src="/projects/mercuriarp.png"
                   alt="MercuriaRP Preview"
                   class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
-              />
-              <div class="absolute inset-0 bg-gradient-to-t from-[#1E1E1E] to-transparent opacity-50"></div>
+              >
+              <div class="absolute inset-0 bg-linear-to-t from-[#1E1E1E] to-transparent opacity-50"/>
             </div>
 
             <!-- Infos du projet -->
@@ -80,6 +81,7 @@
               <a
                   href="https://mercuriarp.fr"
                   target="_blank"
+                  rel="noopener noreferrer"
                   class="inline-flex items-center gap-2 mt-6 text-blue-400 hover:text-blue-300 transition-colors"
               >
                 <span>Visiter le site</span>
@@ -101,10 +103,11 @@
         >
           <div class="bg-[#1E1E1E] rounded-xl overflow-hidden">
             <div class="flex items-center gap-2 px-4 py-3 bg-gray-800/50">
-              <div class="w-3 h-3 rounded-full bg-red-500"></div>
-              <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
-              <div class="w-3 h-3 rounded-full bg-green-500 hover:bg-green-700 transition-colors"
-              @click="openUrl('https://lpnet.fr')"></div>
+              <div class="w-3 h-3 rounded-full bg-red-500"/>
+              <div class="w-3 h-3 rounded-full bg-yellow-500"/>
+              <div
+class="w-3 h-3 rounded-full bg-green-500 hover:bg-green-700 transition-colors"
+              @click="openUrl('https://lpnet.fr')"/>
               <span class="ml-2 text-sm text-gray-400">lpnet.fr</span>
             </div>
 
@@ -114,8 +117,8 @@
                   src="/projects/lpnet.png"
                   alt="LPNet Preview"
                   class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
-              />
-              <div class="absolute inset-0 bg-gradient-to-t from-[#1E1E1E] to-transparent opacity-50"></div>
+              >
+              <div class="absolute inset-0 bg-linear-to-t from-[#1E1E1E] to-transparent opacity-50"/>
             </div>
 
             <!-- Infos du projet -->
@@ -147,6 +150,7 @@
               <a
                   href="https://lpnet.fr"
                   target="_blank"
+                  rel="noopener noreferrer"
                   class="inline-flex items-center gap-2 mt-6 text-blue-400 hover:text-blue-300 transition-colors"
               >
                 <span>Visiter le site</span>
@@ -166,7 +170,8 @@
 <script setup>
 
 function openUrl(url) {
-  window.open(url, '_blank')
+  // `noopener` empêche la page ouverte d'accéder à window.opener (reverse tabnabbing).
+  window.open(url, '_blank', 'noopener,noreferrer')
 }
 
 </script>

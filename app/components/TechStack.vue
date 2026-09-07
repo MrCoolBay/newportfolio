@@ -3,14 +3,14 @@
     <!-- En-tête de section -->
     <div class="mb-16 max-w-6xl mx-auto px-4">
       <div class="flex items-baseline gap-4">
-        <h2 class="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+        <h2 class="text-3xl font-bold bg-linear-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
           Tech Stack
         </h2>
         <div class="font-mono text-gray-400 text-sm">
           <span class="text-pink-600">import</span> * <span class="text-pink-600">from</span> <span class="text-green-600">'./skills'</span>
         </div>
       </div>
-      <div class="mt-2 h-px w-full bg-gradient-to-r from-blue-600/50 to-purple-600/50"></div>
+      <div class="mt-2 h-px w-full bg-linear-to-r from-blue-600/50 to-purple-600/50"/>
     </div>
 
     <!-- Grille des technologies -->
@@ -29,8 +29,8 @@
           <div class="relative bg-[#1E1E1E] rounded-xl p-6 border border-gray-800 overflow-hidden">
             <!-- Background animé au hover -->
             <div
-                class="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-purple-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-            ></div>
+                class="absolute inset-0 bg-linear-to-r from-blue-600/10 to-purple-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+            />
 
             <!-- Contenu -->
             <div class="relative z-10">
@@ -50,8 +50,8 @@
                         v-for="i in 5"
                         :key="i"
                         class="w-1.5 h-1.5 rounded-full transition-colors duration-300"
-                        :class="i <= (tech.expertise / 20) ? 'bg-gradient-to-r from-blue-500 to-purple-600' : 'bg-gray-700'"
-                    ></div>
+                        :class="i <= (tech.expertise / 20) ? 'bg-linear-to-r from-blue-500 to-purple-600' : 'bg-gray-700'"
+                    />
                   </div>
                 </div>
               </div>

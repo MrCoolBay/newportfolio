@@ -13,7 +13,7 @@
           <div
               class="absolute inset-0 m-auto w-1 h-1 bg-gray-200 rounded-full"
               :class="{ 'bg-blue-500/20': i % 7 === 0 }"
-          ></div>
+          />
         </div>
       </div>
     </div>
@@ -28,7 +28,7 @@
         n === 2 ? 'bg-purple-500 w-80 h-80 bottom-40 -right-20' : '',
         n === 3 ? 'bg-blue-500 w-64 h-64 top-1/2 left-1/3' : ''
       ]"
-    ></div>
+    />
 
     <!-- Contenu principal -->
     <div class="relative min-h-screen flex items-center justify-center p-4">
@@ -46,9 +46,10 @@
                 to="/"
                 class="w-3 h-3 rounded-full bg-red-500 hover:bg-red-600 transition-colors"
                 title="Retour à l'accueil"
-            ></NuxtLink>
-            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
-            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                @click.prevent="handleError"
+            />
+            <div class="w-3 h-3 rounded-full bg-yellow-500"/>
+            <div class="w-3 h-3 rounded-full bg-green-500"/>
             <span class="ml-2 text-sm text-gray-400 font-mono">error.js</span>
           </div>
 
@@ -78,8 +79,8 @@
 
             <!-- Code d'erreur animé -->
             <div
-                class="text-[150px] font-bold text-blue-600 leading-none"
                 v-motion
+                class="text-[150px] font-bold text-blue-600 leading-none"
                 :initial="{ opacity: 0, scale: 0.8 }"
                 :enter="{ opacity: 1, scale: 1 }"
             >
@@ -96,6 +97,7 @@
               <NuxtLink
                   to="/"
                   class="inline-flex items-center gap-2 px-6 py-3 border border-gray-700 text-gray-300 rounded-lg hover:bg-gray-800/50 transition-colors"
+                  @click.prevent="handleError"
               >
                 <span class="font-mono">cd /home</span>
               </NuxtLink>
@@ -140,8 +142,13 @@ const getErrorDescription = computed(() => {
   return errorDescriptions[props.error.statusCode] || errorDescriptions.default
 })
 
-// Gestion de l'erreur
-const handleError = () => {
-  clearError()
-}
+/**
+ * Sortie de l'état d'erreur.
+ *
+ * Un simple `<NuxtLink to="/">` ne suffit pas : tant que `clearError()` n'a pas
+ * été appelé, Nuxt reste sur la page d'erreur. Le `href` est conservé (clic
+ * milieu, ouverture dans un nouvel onglet) et `@click.prevent` prend le relais
+ * pour la navigation normale.
+ */
+const handleError = () => clearError({ redirect: '/' })
 </script>

@@ -4,14 +4,14 @@
       <!-- En-tête stylisé -->
       <div class="mb-16 max-w-7xl mx-auto">
         <div class="flex items-baseline gap-4">
-          <h2 class="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+          <h2 class="text-3xl font-bold bg-linear-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
             Contact
           </h2>
           <div class="font-mono text-gray-400 text-sm">
             <span class="text-pink-600">import</span> { contact } <span class="text-pink-600">from</span> <span class="text-green-600">'./me'</span>
           </div>
         </div>
-        <div class="mt-2 h-px w-full bg-gradient-to-r from-blue-600/50 to-purple-600/50"></div>
+        <div class="mt-2 h-px w-full bg-linear-to-r from-blue-600/50 to-purple-600/50"/>
       </div>
 
       <div class="grid lg:grid-cols-2 gap-12">
@@ -23,57 +23,89 @@
             class="bg-[#1E1E1E] rounded-xl overflow-hidden"
         >
           <div class="flex items-center gap-2 px-4 py-3 bg-gray-800/50">
-            <div class="w-3 h-3 rounded-full bg-red-500"></div>
-            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
-            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+            <div class="w-3 h-3 rounded-full bg-red-500"/>
+            <div class="w-3 h-3 rounded-full bg-yellow-500"/>
+            <div class="w-3 h-3 rounded-full bg-green-500"/>
             <span class="ml-2 text-sm text-gray-400">contact.js</span>
           </div>
 
-          <form @submit.prevent="handleSubmit" class="p-6 space-y-6 text-white">
+          <form class="relative p-6 space-y-6 text-white" @submit.prevent="handleSubmit">
             <div class="grid md:grid-cols-2 gap-6">
               <div class="space-y-2">
-                <label class="block text-sm font-mono text-gray-400">firstName: <span class="text-pink-400">string</span></label>
+                <label for="firstName" class="block text-sm font-mono text-gray-400">firstName: <span class="text-pink-400">string</span></label>
                 <input
+                    id="firstName"
                     v-model="form.firstName"
                     type="text"
-                    class="w-full bg-gray-800/50 border border-gray-700 rounded-lg px-4 py-2 focus:border-blue-500 focus:outline-none"
+                    name="firstName"
+                    autocomplete="given-name"
+                    maxlength="60"
                     required
-                />
+                    class="w-full bg-gray-800/50 border border-gray-700 rounded-lg px-4 py-2 focus:border-blue-500 focus:outline-hidden"
+                >
               </div>
               <div class="space-y-2">
-                <label class="block text-sm font-mono text-gray-400">lastName: <span class="text-pink-400">string</span></label>
+                <label for="lastName" class="block text-sm font-mono text-gray-400">lastName: <span class="text-pink-400">string</span></label>
                 <input
+                    id="lastName"
                     v-model="form.lastName"
                     type="text"
-                    class="w-full bg-gray-800/50 border border-gray-700 rounded-lg px-4 py-2 focus:border-blue-500 focus:outline-none"
+                    name="lastName"
+                    autocomplete="family-name"
+                    maxlength="60"
                     required
-                />
+                    class="w-full bg-gray-800/50 border border-gray-700 rounded-lg px-4 py-2 focus:border-blue-500 focus:outline-hidden"
+                >
               </div>
             </div>
 
             <div class="space-y-2">
-              <label class="block text-sm font-mono text-gray-400">email: <span class="text-pink-400">string</span></label>
+              <label for="email" class="block text-sm font-mono text-gray-400">email: <span class="text-pink-400">string</span></label>
               <input
+                  id="email"
                   v-model="form.email"
                   type="email"
-                  class="w-full bg-gray-800/50 border border-gray-700 rounded-lg px-4 py-2 focus:border-blue-500 focus:outline-none"
+                  name="email"
+                  autocomplete="email"
+                  maxlength="254"
                   required
-              />
+                  class="w-full bg-gray-800/50 border border-gray-700 rounded-lg px-4 py-2 focus:border-blue-500 focus:outline-hidden"
+              >
             </div>
 
             <div class="space-y-2">
-              <label class="block text-sm font-mono text-gray-400">message: <span class="text-pink-400">string</span></label>
+              <label for="message" class="block text-sm font-mono text-gray-400">message: <span class="text-pink-400">string</span></label>
               <textarea
+                  id="message"
                   v-model="form.message"
-                  class="w-full bg-gray-800/50 border border-gray-700 rounded-lg px-4 py-2 h-32 focus:border-blue-500 focus:outline-none"
+                  name="message"
+                  minlength="10"
+                  maxlength="5000"
                   required
-              ></textarea>
+                  class="w-full bg-gray-800/50 border border-gray-700 rounded-lg px-4 py-2 h-32 focus:border-blue-500 focus:outline-hidden"
+              />
+              <p class="text-xs font-mono text-gray-500">{{ form.message.length }} / 5000</p>
+            </div>
+
+            <!-- Piège à bots : sorti du flux, ignoré par le clavier et les
+                 lecteurs d'écran. Un envoi avec ce champ rempli est rejeté
+                 silencieusement côté serveur. -->
+            <div class="absolute -left-[9999px] top-0" aria-hidden="true">
+              <label for="website">Website</label>
+              <input
+                  id="website"
+                  v-model="form.website"
+                  type="text"
+                  name="website"
+                  tabindex="-1"
+                  autocomplete="off"
+              >
             </div>
 
             <button
                 type="submit"
-                class="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 rounded-lg hover:opacity-90 transition-opacity font-mono"
                 :disabled="isSubmitting"
+                class="cursor-pointer w-full bg-linear-to-r from-blue-600 to-purple-600 text-white py-3 rounded-lg hover:opacity-90 transition-opacity font-mono disabled:cursor-not-allowed disabled:opacity-60"
             >
               {{ isSubmitting ? "Envoi..." : "Envoyer" }}
             </button>
@@ -88,9 +120,9 @@
             class="bg-[#1E1E1E] rounded-xl overflow-hidden"
         >
           <div class="flex items-center gap-2 px-4 py-3 bg-gray-800/50">
-            <div class="w-3 h-3 rounded-full bg-red-500"></div>
-            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
-            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+            <div class="w-3 h-3 rounded-full bg-red-500"/>
+            <div class="w-3 h-3 rounded-full bg-yellow-500"/>
+            <div class="w-3 h-3 rounded-full bg-green-500"/>
             <span class="ml-2 text-sm text-gray-400">terminal</span>
           </div>
 
@@ -154,7 +186,10 @@
     <!-- Toast -->
     <div
         v-if="showToast"
-        class="fixed bottom-4 right-4 bg-gray-800 text-white px-6 py-3 rounded-lg shadow-lg"
+        role="status"
+        aria-live="polite"
+        class="fixed bottom-4 right-4 px-6 py-3 rounded-lg shadow-lg text-white"
+        :class="toastIsError ? 'bg-red-700' : 'bg-gray-800'"
     >
       {{ toastMessage }}
     </div>
@@ -162,47 +197,47 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+const EMPTY_FORM = { firstName: '', lastName: '', email: '', message: '', website: '' }
 
-// État du formulaire
-const form = ref({
-  firstName: "",
-  lastName: "",
-  email: "",
-  message: "",
-});
+const form = ref({ ...EMPTY_FORM })
+const isSubmitting = ref(false)
+const showToast = ref(false)
+const toastMessage = ref('')
+const toastIsError = ref(false)
 
-const isSubmitting = ref(false);
-const showToast = ref(false);
-const toastMessage = ref("");
+let toastTimer
 
-// Fonction d'envoi du formulaire
-const handleSubmit = async () => {
+function notify(message, isError = false) {
+  toastMessage.value = message
+  toastIsError.value = isError
+  showToast.value = true
+  clearTimeout(toastTimer)
+  toastTimer = setTimeout(() => {
+    showToast.value = false
+  }, 6000)
+}
+
+onUnmounted(() => clearTimeout(toastTimer))
+
+async function handleSubmit() {
+  // Le bouton est déjà `disabled`, mais un double submit peut passer par la
+  // touche Entrée avant le re-rendu.
+  if (isSubmitting.value) return
+
+  isSubmitting.value = true
+
   try {
-    isSubmitting.value = true;
-
-    const response = await fetch("/api/contact", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(form.value),
-    });
-
-    if (!response.ok) {
-      throw new Error("Erreur lors de l'envoi");
-    }
-
-    Object.keys(form.value).forEach((key) => (form.value[key] = ""));
-    toastMessage.value = "Message envoyé avec succès !";
-    showToast.value = true;
-    setTimeout(() => showToast.value = false, 5000);
-  } catch (error) {
-    console.error("Error:", error);
-    toastMessage.value = "Une erreur est survenue. Veuillez réessayer.";
-    showToast.value = true;
-  } finally {
-    isSubmitting.value = false;
+    await $fetch('/api/contact', { method: 'POST', body: form.value })
+    form.value = { ...EMPTY_FORM }
+    notify('Message envoyé avec succès !')
   }
-};
+  catch (error) {
+    // Le serveur expose un message destiné à l'utilisateur pour 400/429/502/503 ;
+    // tout le reste retombe sur un texte générique.
+    notify(error?.data?.message || 'Une erreur est survenue. Veuillez réessayer.', true)
+  }
+  finally {
+    isSubmitting.value = false
+  }
+}
 </script>

@@ -9,11 +9,11 @@
             :style="{
             background: `radial-gradient(circle at ${mouseX}px ${mouseY}px, rgb(37, 99, 235), transparent 25%)`
           }"
-        ></div>
+        />
 
         <div class="relative flex items-center justify-between h-16 px-6">
           <!-- Logo avec animation au scroll -->
-          <div class="flex-shrink-0">
+          <div class="shrink-0">
             <NuxtLink
                 to="/"
                 class="group relative text-2xl font-bold overflow-hidden inline-block"
@@ -22,13 +22,13 @@
                 <!-- Version normale -->
                 <div class="relative inline-flex">
                   <!-- Slash fixe -->
-                  <span class="bg-gradient-to-r from-[#4F46E5] to-[#7C3AED] bg-clip-text text-transparent transition-all duration-300">/</span>
+                  <span class="bg-linear-to-r from-[#4F46E5] to-[#7C3AED] bg-clip-text text-transparent transition-all duration-300">/</span>
 
                   <!-- F et "abien" -->
                   <div class="relative inline-flex">
-                    <span class="bg-gradient-to-r from-[#4F46E5] to-[#7C3AED] bg-clip-text text-transparent transition-all duration-300">F</span>
+                    <span class="bg-linear-to-r from-[#4F46E5] to-[#7C3AED] bg-clip-text text-transparent transition-all duration-300">F</span>
                     <span
-                        class="bg-gradient-to-r from-[#4F46E5] to-[#7C3AED] bg-clip-text text-transparent transition-all duration-300 origin-left"
+                        class="bg-linear-to-r from-[#4F46E5] to-[#7C3AED] bg-clip-text text-transparent transition-all duration-300 origin-left"
                         :class="{ 'opacity-0 scale-x-0': isScrolled }"
                     >abien</span>
                   </div>
@@ -38,16 +38,16 @@
                       class="relative inline-flex transition-all duration-300 ml-1"
                       :class="{ '-translate-x-[4.2rem]': isScrolled }"
                   >
-                    <span class="bg-gradient-to-r from-[#4F46E5] to-[#7C3AED] bg-clip-text text-transparent transition-all duration-300">L</span>
+                    <span class="bg-linear-to-r from-[#4F46E5] to-[#7C3AED] bg-clip-text text-transparent transition-all duration-300">L</span>
                     <span
-                        class="bg-gradient-to-r from-[#4F46E5] to-[#7C3AED] bg-clip-text text-transparent transition-all duration-300 origin-left"
+                        class="bg-linear-to-r from-[#4F46E5] to-[#7C3AED] bg-clip-text text-transparent transition-all duration-300 origin-left"
                         :class="{ 'opacity-0 scale-x-0': isScrolled }"
                     >ubin</span>
                   </div>
 
                   <!-- Chevron fermant avec ajustement de la translation -->
                   <span
-                      class="bg-gradient-to-r from-[#4F46E5] to-[#7C3AED] bg-clip-text text-transparent transition-all duration-300 ml-[0.1rem]"
+                      class="bg-linear-to-r from-[#4F46E5] to-[#7C3AED] bg-clip-text text-transparent transition-all duration-300 ml-[0.1rem]"
                       :class="{ '-translate-x-[7.3rem]': isScrolled }"
                   >></span>
                 </div>
@@ -57,13 +57,13 @@
               <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-300">
                 <div class="relative inline-flex">
                   <!-- Slash fixe -->
-                  <span class="bg-gradient-to-r from-[#7C3AED] to-[#4F46E5] bg-clip-text text-transparent transition-all duration-300">/</span>
+                  <span class="bg-linear-to-r from-[#7C3AED] to-[#4F46E5] bg-clip-text text-transparent transition-all duration-300">/</span>
 
                   <!-- F et "abien" -->
                   <div class="relative inline-flex">
-                    <span class="bg-gradient-to-r from-[#7C3AED] to-[#4F46E5] bg-clip-text text-transparent transition-all duration-300">F</span>
+                    <span class="bg-linear-to-r from-[#7C3AED] to-[#4F46E5] bg-clip-text text-transparent transition-all duration-300">F</span>
                     <span
-                        class="bg-gradient-to-r from-[#7C3AED] to-[#4F46E5] bg-clip-text text-transparent transition-all duration-300 origin-left"
+                        class="bg-linear-to-r from-[#7C3AED] to-[#4F46E5] bg-clip-text text-transparent transition-all duration-300 origin-left"
                         :class="{ 'opacity-0 scale-x-0': isScrolled }"
                     >abien</span>
                   </div>
@@ -73,16 +73,16 @@
                       class="relative inline-flex transition-all duration-300 ml-1"
                       :class="{ '-translate-x-[4.2rem]': isScrolled }"
                   >
-                    <span class="bg-gradient-to-r from-[#7C3AED] to-[#4F46E5] bg-clip-text text-transparent transition-all duration-300">L</span>
+                    <span class="bg-linear-to-r from-[#7C3AED] to-[#4F46E5] bg-clip-text text-transparent transition-all duration-300">L</span>
                     <span
-                        class="bg-gradient-to-r from-[#7C3AED] to-[#4F46E5] bg-clip-text text-transparent transition-all duration-300 origin-left"
+                        class="bg-linear-to-r from-[#7C3AED] to-[#4F46E5] bg-clip-text text-transparent transition-all duration-300 origin-left"
                         :class="{ 'opacity-0 scale-x-0': isScrolled }"
                     >ubin</span>
                   </div>
 
                   <!-- Chevron fermant -->
                   <span
-                      class="bg-gradient-to-r from-[#4F46E5] to-[#7C3AED] bg-clip-text text-transparent transition-all duration-300 ml-[0.1rem]"
+                      class="bg-linear-to-r from-[#4F46E5] to-[#7C3AED] bg-clip-text text-transparent transition-all duration-300 ml-[0.1rem]"
                       :class="{ '-translate-x-[7.3rem]': isScrolled }"
                   >></span>
                 </div>
@@ -95,9 +95,9 @@
           <div class="hidden md:flex items-center space-x-1">
             <template v-for="item in menuItems" :key="item.name">
               <NuxtLink
+                  v-slot="{ isActive }"
                   :to="item.href"
                   class="relative px-4 py-2 group overflow-hidden rounded-lg hover:text-white"
-                  v-slot="{ isActive }"
               >
                 <!-- Texte du menu -->
                 <span
@@ -109,12 +109,12 @@
 
                 <!-- Background animé -->
                 <div
-                    class="absolute inset-0 transition-all duration-300 bg-gradient-to-r from-blue-600 to-purple-600"
+                    class="absolute inset-0 transition-all duration-300 bg-linear-to-r from-blue-600 to-purple-600"
                     :class="[
                     isActive ? 'translate-y-0' : 'translate-y-full',
                     'group-hover:translate-y-0'
                   ]"
-                ></div>
+                />
               </NuxtLink>
             </template>
           </div>
@@ -136,7 +136,7 @@
             />
 
             <!-- Background au hover -->
-            <div class="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div class="absolute inset-0 bg-linear-to-r from-blue-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"/>
 
             <!-- Tooltip -->
             <span class="absolute left-1/2 -translate-x-1/2 -bottom-10 px-3 py-1 text-xs text-white bg-gray-900 rounded-full opacity-0 group-hover:opacity-100 group-hover:-bottom-8 transition-all duration-300">
@@ -147,22 +147,22 @@
 
           <!-- Menu burger mobile avec animation -->
           <button
+              class="cursor-pointer md:hidden relative w-10 h-10 focus:outline-hidden"
               @click="isOpen = !isOpen"
-              class="md:hidden relative w-10 h-10 focus:outline-none"
           >
             <div class="absolute inset-0 flex flex-col justify-center items-center">
               <span
                   class="w-6 h-0.5 bg-gray-600 transform transition-transform duration-300"
                   :class="{ 'rotate-45 translate-y-[0.3rem]': isOpen }"
-              ></span>
+              />
               <span
                   class="w-6 h-0.5 bg-gray-600 mt-1.5 transition-opacity duration-300"
                   :class="{ 'opacity-0': isOpen }"
-              ></span>
+              />
               <span
                   class="w-6 h-0.5 bg-gray-600 mt-1.5 transform transition-transform duration-300"
                   :class="{ '-rotate-45 -translate-y-[0.3rem]': isOpen }"
-              ></span>
+              />
             </div>
           </button>
         </div>
@@ -183,7 +183,7 @@
                 v-for="item in menuItems"
                 :key="item.name"
                 :to="item.href"
-                class="block px-4 py-2 text-gray-700 hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-600 hover:text-white rounded-lg transition-colors duration-300"
+                class="block px-4 py-2 text-gray-700 hover:bg-linear-to-r hover:from-blue-600 hover:to-purple-600 hover:text-white rounded-lg transition-colors duration-300"
             >
               {{ item.name }}
             </NuxtLink>

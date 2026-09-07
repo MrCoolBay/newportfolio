@@ -5,7 +5,7 @@
         class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border border-gray-700"
         :width="canvasWidth"
         :height="canvasHeight"
-    ></canvas>
+    />
 
     <!-- Score -->
     <div class="absolute top-4 left-4 text-green-500 font-mono">
@@ -17,8 +17,8 @@
       <div class="text-center">
         <p class="text-red-500 text-2xl font-bold mb-4">GAME OVER !</p>
         <button
+            class="cursor-pointer px-4 py-2 bg-green-500 text-black rounded-sm hover:bg-green-400"
             @click="startGame"
-            class="px-4 py-2 bg-green-500 text-black rounded hover:bg-green-400"
         >
           Rejouer
         </button>
