@@ -35,7 +35,7 @@ Deux pièges d'environnement, tous deux déjà rencontrés sur cette machine :
 | `npm run lint` / `npm run lint:fix` | ESLint |
 | `npm run typecheck` | `vue-tsc` |
 | `npm audit` | référence : **`found 0 vulnerabilities`** |
-| `.claude/skills/security-audit/run.sh` | 71 contrôles de sécurité, référence **71 PASS / 0 FAIL** |
+| `.claude/skills/security-audit/run.sh` | 72 contrôles de sécurité, référence **72 PASS / 0 FAIL** |
 | `node .claude/tools/ai-council.mjs --status` | revue croisée multi-modèles |
 | `node .claude/tools/sync-agent-docs.mjs --check` | vérifie que les fichiers dérivés sont à jour |
 

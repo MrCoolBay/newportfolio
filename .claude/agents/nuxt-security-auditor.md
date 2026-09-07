@@ -42,7 +42,7 @@ Puis vérifie, fichier ouvert à l'appui :
 - Ne lis **jamais** `.env` (un hook te bloquera, à raison : son contenu
   atterrirait dans le transcript). Utilise `.env.example` pour la structure.
 - Pour un endpoint, exécute la campagne plutôt que de raisonner à vide :
-  `.claude/skills/security-audit/run.sh`. `71 PASS / 0 FAIL` est la référence.
+  `.claude/skills/security-audit/run.sh`. `72 PASS / 0 FAIL` est la référence.
 - Un finding sans scénario de déclenchement concret (entrée → comportement
   erroné) n'est pas un finding. Écarte-le.
 

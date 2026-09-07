@@ -1,6 +1,6 @@
 ---
 name: security-audit
-description: Lance la campagne de tests de sécurité (71 contrôles) contre un build de production de ce portfolio, avec relais SMTP factice. À utiliser avant un déploiement, après toute modification de server/api/, de nuxt.config.ts, ou quand on demande un audit/pentest du site.
+description: Lance la campagne de tests de sécurité (72 contrôles) contre un build de production de ce portfolio, avec relais SMTP factice. À utiliser avant un déploiement, après toute modification de server/api/, de nuxt.config.ts, ou quand on demande un audit/pentest du site.
 ---
 
 # Audit de sécurité du portfolio
@@ -16,7 +16,7 @@ donnerait un faux sentiment de sécurité.
 ```
 
 Le script est autonome : il construit si nécessaire, génère un certificat,
-démarre un relais SMTP factice, lance les 71 contrôles, inspecte le trafic SMTP
+démarre un relais SMTP factice, lance les 72 contrôles, inspecte le trafic SMTP
 brut, puis nettoie. **Aucun mail ne part vers une vraie adresse.**
 
 Cibler un serveur déjà démarré :
@@ -42,7 +42,7 @@ TARGET=http://127.0.0.1:3000 python3 .claude/skills/security-audit/pentest.py
 
 ## Lire le résultat
 
-`71 PASS / 0 FAIL` est l'état de référence. Toute régression est un blocage
+`72 PASS / 0 FAIL` est l'état de référence. Toute régression est un blocage
 de déploiement.
 
 Deux faux échecs connus, à ne pas confondre avec des régressions :
@@ -53,6 +53,33 @@ Deux faux échecs connus, à ne pas confondre avec des régressions :
 - **Le chemin nominal échoue en 502** si `NODE_EXTRA_CA_CERTS` n'est pas passé :
   c'est le durcissement TLS (`rejectUnauthorized`) qui refuse le certificat
   auto-signé du relais. C'est le comportement correct.
+
+## Cibler un serveur distant : à éviter
+
+Le harness est fait pour un build de **production local**. Les `routeRules` et
+le handler y sont identiques à la production ; ce qui diffère, c'est ce qui se
+trouve devant.
+
+En distant, deux garde-fous coupent la campagne plutôt que de rendre des
+verdicts faux :
+
+- **`exit 2` — cible invalide.** Le préflight vérifie que la cible sert bien
+  cette application (asset `/_nuxt/`, et `POST /api/contact` en `text/plain`
+  qui répond 415). Sinon la campagne s'arrête avant la première assertion. Sans
+  ça, une cible injoignable produit des dizaines de FAIL trompeurs — et des
+  PASS, puisque « la réponse ne fuit pas `zod` » passe trivialement sur une
+  page de redirection.
+- **`exit 3` — pare-feu de l'hébergeur.** Cette campagne *est* un trafic
+  d'attaque : charges d'injection, `X-Forwarded-For` usurpé, corps
+  surdimensionnés, rafales. Un WAF la bloque, et c'est son travail. Constaté
+  sur ce projet : Vercel a fini par servir « Vercel Security Checkpoint » sur
+  **toutes** les routes, IP source défiée durablement.
+
+En distant, s'en tenir à un contrôle d'en-têtes sur une requête isolée :
+
+```bash
+curl -sI https://www.fabienlubin.fr/ | grep -iE "content-security|strict-transport|x-frame"
+```
 
 ## Invariants à ne jamais casser
 
