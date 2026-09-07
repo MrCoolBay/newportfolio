@@ -126,6 +126,16 @@ Interface et commentaires de code en **français**, accents inclus. Esthétique
 à trois pastilles, dégradés bleu→violet, animations `v-motion`
 (`@vueuse/motion`).
 
+## Git
+
+**Aucun trailer `Co-Authored-By` dans les messages de commit.** Le propriétaire
+du dépôt n'en veut pas dans son historique, sans exception — y compris pour un
+co-auteur d'agent. Le hook `.claude/hooks/commit-policy.mjs` refuse toute
+commande `git commit`, `git merge`, `git tag -a` ou `gh pr create` dont le
+message en contient un.
+
+Ne committer et ne pousser que sur demande explicite.
+
 ## Attentes de restitution
 
 Un build qui passe ne prouve rien sur le rendu : Tailwind 4 casse des classes
