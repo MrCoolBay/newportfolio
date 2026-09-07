@@ -55,9 +55,15 @@ try {
   const pkg = JSON.parse(readFileSync(at('package.json'), 'utf8'))
   const required = pkg.engines?.node
   if (required && !satisfies(process.version, required)) {
+    const major = parse(process.version)[0]
+    // Deux causes distinctes, deux messages : une version impaire n'est pas LTS
+    // et n'est supportée par personne ; une LTS paire hors plage est simplement
+    // un décalage avec le runtime de production.
+    const cause = major % 2 === 1
+      ? `Les versions impaires (23, 25) ne sont pas LTS et ne sont supportées ni par Nuxt ni par ce projet.`
+      : `C'est une LTS, mais ce projet tient un seul runtime, celui de la production.`
     notes.push(
-      `Node ${process.version} est HORS de la plage supportée par Nuxt (\`${required}\`). `
-      + `Les versions impaires (23, 25) ne sont pas LTS et ne sont pas supportées. `
+      `Node ${process.version} est HORS de la plage attendue (\`${required}\`). ${cause} `
       + `Lance \`nvm use\` (un .nvmrc est fourni) avant tout npm/nuxt.`,
     )
   }

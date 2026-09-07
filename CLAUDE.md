@@ -10,16 +10,22 @@ pas de base de données. La seule surface d'écriture est `POST /api/contact`.
 ## Avant toute commande
 
 ```bash
-nvm use    # Node 22 LTS via .nvmrc
+nvm use    # Node 24 LTS via .nvmrc
 ```
 
-Deux pièges d'environnement, tous deux déjà rencontrés sur cette machine :
+**Un seul runtime : Node 24.** C'est celui que sert Vercel en production, donc
+`.nvmrc` et `engines.node` s'y tiennent. Cette égalité dev/prod n'est pas
+cosmétique : deux bugs de ce projet venaient d'un décalage de version de Node.
 
-- **Node impair (23, 25) ne marche pas.** Nuxt 4.5 exige
-  `^22.19.0 || ^24.11.0 || >=26.0.0`. Le Node par défaut de cette machine
-  (25.x) est hors plage.
+Pièges déjà rencontrés :
+
+- **Node impair (23, 25) ne marche pas** — ces versions ne sont pas LTS et sont
+  hors de la plage supportée par Nuxt. Le Node par défaut de cette machine
+  (25.x) en fait partie : toujours `nvm use` avant npm ou nuxt.
+- **Node 22 n'est plus supporté ici.** Il fonctionne techniquement avec Nuxt,
+  mais la production est en 24 et on ne maintient pas deux runtimes.
 - **npm 10.9.x échoue** sur `npm install` (`Cannot read properties of null
-  (reading 'edgesOut')`, bug arborist). npm >= 11 requis.
+  (reading 'edgesOut')`, bug arborist). npm >= 11 requis — Node 24 l'embarque.
 
 ## Commandes
 

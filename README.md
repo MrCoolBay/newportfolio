@@ -4,14 +4,16 @@ Portfolio personnel construit avec **Nuxt 4**, **Vue 3** et **Tailwind CSS 4**.
 
 ## Prérequis
 
-Node **22.19+**, **24.11+** ou **26+** (plage supportée par Nuxt 4.5). Un `.nvmrc`
-est fourni :
+Node **24.11+** — la version servie par Vercel en production. Un `.nvmrc` est
+fourni :
 
 ```bash
 nvm use
 ```
 
-> Node 23 et 25 (versions impaires, non LTS) sont hors de la plage supportée.
+> Node 23 et 25 (versions impaires, non LTS) ne sont pas supportés. Node 22
+> fonctionne avec Nuxt mais n'est plus la cible de ce projet : dev et prod
+> tiennent le même runtime.
 
 ## Installation
 
