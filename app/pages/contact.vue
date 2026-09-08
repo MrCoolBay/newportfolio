@@ -131,9 +131,9 @@
                 <dt class="w-24 shrink-0 font-mono text-ink-muted">e-mail</dt>
                 <dd>
                   <a
-                    href="mailto:contact@fabienlubin.fr"
+                    href="mailto:bonjour@fabienlubin.fr"
                     class="text-accent-700 hover:underline"
-                  >contact@fabienlubin.fr</a>
+                  >bonjour@fabienlubin.fr</a>
                 </dd>
               </div>
               <div class="flex gap-3">

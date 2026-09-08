@@ -108,6 +108,6 @@ const publisher = [
   { label: 'SIREN', value: '988 265 195' },
   { label: 'Activité (code APE)', value: '62.01Z — Programmation informatique' },
   { label: 'Immatriculation au RNE', value: '19 juin 2025' },
-  { label: 'Contact', value: 'contact@fabienlubin.fr', mailto: true },
+  { label: 'Contact', value: 'bonjour@fabienlubin.fr', mailto: true },
 ]
 </script>

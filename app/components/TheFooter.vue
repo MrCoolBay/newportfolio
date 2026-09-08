@@ -31,10 +31,10 @@
           <ul class="mt-4 space-y-2 text-sm">
             <li>
               <a
-                href="mailto:contact@fabienlubin.fr"
+                href="mailto:bonjour@fabienlubin.fr"
                 class="text-ink-soft transition-colors hover:text-accent-700"
               >
-                contact@fabienlubin.fr
+                bonjour@fabienlubin.fr
               </a>
             </li>
             <li

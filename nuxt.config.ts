@@ -81,9 +81,9 @@ export default defineNuxtConfig({
     smtp: {
       host: 'ssl0.ovh.net',
       port: '587',
-      user: 'contact@fabienlubin.fr',
+      user: 'bonjour@fabienlubin.fr',
       pass: '',
-      to: 'contact@fabienlubin.fr',
+      to: 'bonjour@fabienlubin.fr',
     },
     public: {
       siteUrl: SITE_URL,
