@@ -38,14 +38,15 @@
         <section>
           <h2 class="text-lg font-semibold text-ink">Propriété intellectuelle</h2>
           <p class="mt-3">
-            Le code source de ce site est publié sous licence libre et consultable sur
+            Le code source de ce site est publié sous licence MIT et consultable sur
             <a
               href="https://github.com/MrCoolBay/newportfolio"
               target="_blank"
               rel="noopener noreferrer"
               class="text-accent-700 hover:underline"
-            >GitHub</a>. Les visuels des réalisations client restent la propriété de
-            leurs détenteurs respectifs et sont reproduits à titre de référence.
+            >GitHub</a>. Cette licence ne couvre ni les contenus personnels ni les visuels
+            des réalisations client, qui restent la propriété de leurs détenteurs
+            respectifs et sont reproduits à titre de référence.
           </p>
         </section>
 

@@ -1,0 +1,27 @@
+# Portée de la licence
+
+Le fichier `LICENSE` (MIT) couvre le **code source** de ce dépôt : composants
+Vue, routes serveur, configuration, scripts d'outillage et de test.
+
+Les éléments suivants **ne sont pas couverts** par la licence MIT et sont
+exclus de toute autorisation de réutilisation :
+
+## Contenu personnel
+
+Les textes de présentation, le parcours professionnel, la formation et toute
+donnée personnelle figurant dans `app/pages/about.vue`, `app/pages/index.vue`
+et les métadonnées du site. Ils décrivent une personne réelle et ne sont pas
+réutilisables.
+
+## Marques et visuels de tiers
+
+- `public/projects/lunivers-*.webp` — logo et photographies du bar L'Univers
+  (Sedan), reproduits à titre de référence de réalisation. Ces éléments restent
+  la propriété de leur détenteur.
+- `public/favicon/`, `public/img/logo.svg` — identité visuelle de Fabien Lubin.
+
+## Réutilisation
+
+Vous pouvez reprendre l'architecture, les composants et l'outillage de ce
+dépôt. Remplacez les contenus personnels et les visuels de tiers par les
+vôtres avant toute publication.
