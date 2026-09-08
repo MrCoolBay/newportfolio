@@ -1,156 +1,197 @@
 <template>
-  <main class="min-h-screen pt-10 px-4">
+  <main class="min-h-screen px-4 pt-10">
     <div class="container mx-auto max-w-6xl">
-      <!-- En-tête stylisé -->
-      <div class="mb-16 max-w-7xl mx-auto px-4">
-        <div class="flex items-baseline gap-4">
-          <h2 class="text-3xl font-bold bg-linear-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-            A propos
-          </h2>
-          <div class="font-mono text-gray-400 text-sm">
-            <span class="text-pink-600">import</span> { about } <span class="text-pink-600">from</span> <span class="text-green-600">'./me'</span>
-          </div>
-        </div>
-        <div class="mt-2 h-px w-full bg-linear-to-r from-blue-600/50 to-purple-600/50"/>
-      </div>
+      <PageHeader
+        title="Parcours"
+        module="about"
+        subtitle="Développeur full-stack spécialisé Vue.js / Nuxt et FastAPI. Je combine front-end et back-end pour livrer des solutions complètes, sobres et sécurisées."
+      />
 
-      <!-- Section principale -->
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
-        <!-- Colonne gauche -->
-        <div class="space-y-12">
-          <!-- Section Passion -->
-          <section
+      <div class="grid gap-16 lg:grid-cols-[1.4fr_1fr]">
+        <!-- Expériences -->
+        <section>
+          <h2 class="text-xl font-semibold text-ink">Expériences</h2>
+
+          <ol class="mt-8 space-y-10">
+            <li
+              v-for="(job, index) in experiences"
+              :key="job.company"
               v-motion
-              :initial="{ opacity: 0, y: 20 }"
-              :enter="{ opacity: 1, y: 0 }"
-              :duration="500"
-              class="relative"
-          >
-            <div class="absolute -left-4 top-0 bottom-0 w-px bg-linear-to-b from-blue-600 to-purple-600"/>
-            <h2 class="text-2xl font-bold mb-6 bg-linear-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              console.log("L'informatique est ma passion");
-            </h2>
-            <p class="text-gray-600 leading-relaxed">
-              <span class="text-gray-400">// Mon histoire avec le code</span><br>
-              Depuis que je suis tout petit, j'ai toujours été passionné par l'informatique. J'ai commencé à configurer des petits serveurs Minecraft dès le collège, et c'est là que j'ai découvert le développement web.
-            </p>
-          </section>
+              class="relative border-l border-zinc-200 pl-6"
+              :initial="{ opacity: 0, y: 16 }"
+              :enter="{ opacity: 1, y: 0, transition: { delay: index * 100 } }"
+            >
+              <span
+                class="absolute top-1.5 -left-[4.5px] h-2 w-2 rounded-full"
+                :class="job.current ? 'bg-accent-600' : 'bg-zinc-300'"
+              />
+              <p class="font-mono text-xs tracking-wide text-ink-muted uppercase">
+                {{ job.period }}
+              </p>
+              <h3 class="mt-1 font-semibold text-ink">{{ job.role }}</h3>
+              <p class="text-sm text-accent-700">{{ job.company }}</p>
+              <ul class="mt-3 space-y-1.5 text-sm leading-relaxed text-ink-soft">
+                <li v-for="task in job.tasks" :key="task" class="flex gap-2">
+                  <span class="text-accent-700">–</span>
+                  <span>{{ task }}</span>
+                </li>
+              </ul>
+            </li>
+          </ol>
+        </section>
 
-          <!-- Section Formation -->
+        <!-- Colonne latérale -->
+        <div class="space-y-10">
+          <!-- Compétences, en conservant l'esthétique terminal du site -->
           <section
-              v-motion
-              :initial="{ opacity: 0, y: 20 }"
-              :enter="{ opacity: 1, y: 0, transition: { delay: 200 } }"
-              :duration="500"
-              class="relative"
-          >
-            <div class="absolute -left-4 top-0 bottom-0 w-px bg-linear-to-b from-blue-600 to-purple-600"/>
-            <div class="bg-[#1E1E1E] rounded-lg p-6">
-              <div class="flex items-center gap-2 mb-4">
-                <div class="w-3 h-3 rounded-full bg-red-500"/>
-                <div class="w-3 h-3 rounded-full bg-yellow-500"/>
-                <div class="w-3 h-3 rounded-full bg-green-500"/>
-              </div>
-              <code class="block text-sm text-white leading-relaxed">
-                <span class="text-pink-400">const</span> <span class="text-blue-400">formation</span> = {<br>
-                <span class="pl-4">école: <span class="text-green-400">"ESGI"</span>,</span><br>
-                <span class="pl-4">niveau: <span class="text-green-400">"Bachelor Informatique"</span>,</span><br>
-                <span class="pl-4">année: <span class="text-orange-400">2</span></span><br>
-                }
-              </code>
-            </div>
-          </section>
-        </div>
-
-        <!-- Colonne droite -->
-        <div
             v-motion
-            :initial="{ opacity: 0, x: 50 }"
-            :enter="{ opacity: 1, x: 0, transition: { delay: 400 } }"
-            :duration="500"
-            class="relative"
-        >
-          <!-- Terminal avec expérience -->
-          <div class="bg-[#1E1E1E] rounded-lg overflow-hidden shadow-xl">
-            <div class="flex items-center gap-2 p-4 bg-gray-800">
-              <div class="w-3 h-3 rounded-full bg-red-500"/>
-              <div class="w-3 h-3 rounded-full bg-yellow-500"/>
-              <div class="w-3 h-3 rounded-full bg-green-500"/>
-              <span class="ml-2 text-sm text-gray-400">terminal</span>
-            </div>
-
-            <div class="p-6 font-mono text-sm space-y-4">
-              <!-- Commandes de terminal stylisées -->
-              <div class="text-white">
-                <span class="text-green-400">➜</span> <span class="text-blue-400">skills</span> --list
-              </div>
-              <div class="pl-4 space-y-2">
-                <div class="flex items-center gap-2">
-                  <div class="w-2 h-2 rounded-full bg-green-500"/>
-                  <span class="text-gray-300">HTML5, CSS3, JavaScript</span>
-                </div>
-                <div class="flex items-center gap-2">
-                  <div class="w-2 h-2 rounded-full bg-green-500"/>
-                  <span class="text-gray-300">Vue.js, Nuxt.js</span>
-                </div>
-                <div class="flex items-center gap-2">
-                  <div class="w-2 h-2 rounded-full bg-yellow-500"/>
-                  <span class="text-gray-300">PHP, Python (Flask, FastAPI)</span>
-                </div>
-                <div class="flex items-center gap-2">
-                  <div class="w-2 h-2 rounded-full bg-blue-500"/>
-                  <span class="text-gray-300">Linux, Windows Administration</span>
-                </div>
-              </div>
-
-              <div class="text-white mt-6">
-                <span class="text-green-400">➜</span> <span class="text-blue-400">experience</span> --show
-              </div>
-              <div class="pl-4 text-gray-300">
-                # Alternance chez Agreego (Depuis Janvier 2025)<br>
-                • Développement Angular<br>
-                • Création d'APIs avec Node.js<br>
-                • Gestion de projets full-stack
-              </div>
-              <div class="pl-4 text-gray-300">
-                # Stage chez HK-Tech (Juillet - Août 2024)<br>
-                • Développement Vue.js/Nuxt<br>
-                • Création d'APIs avec FastAPI<br>
-                • Gestion de projets full-stack
-              </div>
-            </div>
-          </div>
-
-          <!-- Compteur d'années stylisé -->
-          <div
-              class="absolute -right-8 -bottom-8 w-32 h-32 bg-linear-to-br from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center text-white transform rotate-3 shadow-xl"
+            :initial="{ opacity: 0, x: 24 }"
+            :enter="{ opacity: 1, x: 0, transition: { delay: 200 } }"
           >
-            <div class="text-center">
-              <div class="text-4xl font-bold">5</div>
-              <div class="text-sm">années d'école</div>
+            <div class="overflow-hidden rounded-xl bg-shell shadow-xl">
+              <div class="flex items-center gap-2 bg-shell-bar px-4 py-3">
+                <span class="h-3 w-3 rounded-full bg-red-500" />
+                <span class="h-3 w-3 rounded-full bg-yellow-500" />
+                <span class="h-3 w-3 rounded-full bg-green-500" />
+                <span class="ml-2 font-mono text-sm text-zinc-400">skills</span>
+              </div>
+              <div class="space-y-3 p-6 font-mono text-sm">
+                <p class="text-zinc-300">
+                  <span class="text-emerald-400">➜</span>
+                  <span class="text-sky-400"> skills</span> --list
+                </p>
+                <ul class="space-y-2 pl-4">
+                  <li
+                    v-for="skill in skills"
+                    :key="skill.label"
+                    class="flex items-center gap-2 text-zinc-300"
+                  >
+                    <span class="h-1.5 w-1.5 rounded-full bg-accent-500" />
+                    <span>{{ skill.label }}</span>
+                  </li>
+                </ul>
+              </div>
             </div>
-          </div>
+          </section>
+
+          <!-- Formation -->
+          <section
+            v-motion
+            :initial="{ opacity: 0, x: 24 }"
+            :enter="{ opacity: 1, x: 0, transition: { delay: 300 } }"
+          >
+            <h2 class="text-xl font-semibold text-ink">Formation</h2>
+            <ul class="mt-6 space-y-5">
+              <li v-for="item in education" :key="item.title">
+                <p class="font-mono text-xs tracking-wide text-ink-muted uppercase">
+                  {{ item.year }}
+                </p>
+                <p class="mt-1 font-medium text-ink">{{ item.title }}</p>
+                <p class="text-sm text-ink-soft">{{ item.school }}</p>
+              </li>
+            </ul>
+          </section>
+
+          <!-- Langues -->
+          <section
+            v-motion
+            :initial="{ opacity: 0, x: 24 }"
+            :enter="{ opacity: 1, x: 0, transition: { delay: 400 } }"
+          >
+            <h2 class="text-xl font-semibold text-ink">Langues</h2>
+            <ul class="mt-4 space-y-2 text-sm text-ink-soft">
+              <li>Français — langue maternelle</li>
+              <li>Anglais — niveau intermédiaire</li>
+            </ul>
+          </section>
         </div>
       </div>
-
-      <!-- Bouton CV -->
-<!--      <div-->
-<!--          v-motion-->
-<!--          :initial="{ opacity: 0, y: 20 }"-->
-<!--          :enter="{ opacity: 1, y: 0, transition: { delay: 600 } }"-->
-<!--          class="mt-16 text-center"-->
-<!--      >-->
-<!--        <a-->
-<!--            href="/cv.pdf"-->
-<!--            target="_blank"-->
-<!--            class="inline-flex items-center gap-2 px-6 py-3 bg-linear-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:scale-105 transition-transform"-->
-<!--        >-->
-<!--          <span>Consulter mon CV</span>-->
-<!--          <Icon name="heroicons:arrow-right" class="w-5 h-5" />-->
-<!--        </a>-->
-<!--      </div>-->
     </div>
   </main>
 </template>
-<script setup lang="ts">
+
+<script setup>
+useHead({ title: 'Parcours' })
+
+/**
+ * ATTENTION — les missions listées pour France CyberDefense sont déduites du
+ * poste (développeur full-stack en alternance) et de l'activité de
+ * l'entreprise (SOC managé, investigation, réponse à incident). Elles sont
+ * plausibles mais NON validées : à relire et corriger avec le réel avant de
+ * considérer cette page comme définitive. Aucune donnée chiffrée, aucun nom de
+ * client et aucun outil précis n'a été inventé.
+ */
+const experiences = [
+  {
+    role: 'Alternance — Développeur full-stack',
+    company: 'France CyberDefense',
+    period: 'Décembre 2025 — présent',
+    current: true,
+    tasks: [
+      "Développement d'outils internes pour les équipes de supervision",
+      'Conception d\'interfaces de restitution et d\'API pour exploiter les données de sécurité',
+      'Automatisation de traitements récurrents et de la génération de rapports',
+      'Conteneurisation Docker et intégration aux pipelines CI/CD',
+    ],
+  },
+  {
+    role: 'Alternance — Développeur full-stack',
+    company: 'Agreego',
+    period: 'Février 2025 — décembre 2025',
+    tasks: [
+      'Développement de fonctionnalités front-end et back-end pour des solutions internes',
+      "Conception d'API performantes en Next.js et intégration de services externes (Google Maps)",
+      "Participation à l'architecture applicative, à l'optimisation des performances et à la sécurité",
+      "Mise en place de composants réutilisables et amélioration de l'expérience utilisateur",
+    ],
+  },
+  {
+    role: 'Stage — Développeur full-stack',
+    company: 'HK-Tech',
+    period: 'Juin — août 2024',
+    tasks: [
+      "Développement d'interfaces web modernes avec Vue.js et Nuxt",
+      'Modules back-end en Python avec FastAPI pour automatiser des traitements de données',
+      'Fonctionnalités menées de la conception à la production, avec pipeline et dockerisation',
+    ],
+  },
+  {
+    role: 'Sapeur-pompier volontaire',
+    company: 'SDIS de la Marne',
+    period: 'Septembre 2021 — présent',
+    current: true,
+    tasks: [
+      'Interventions de secours à personnes, incendies et opérations diverses',
+      'Gestion du stress, décision rapide et travail en équipe sous pression',
+      'Formation continue aux techniques de secours et protocoles de sécurité',
+    ],
+  },
+]
+
+const skills = [
+  { label: 'Vue.js, Nuxt, TypeScript' },
+  { label: 'Node.js, PHP' },
+  { label: 'Python, FastAPI' },
+  { label: 'Docker, pipelines CI/CD' },
+  { label: 'Cybersécurité applicative' },
+  { label: 'Administration Linux' },
+]
+
+const education = [
+  {
+    year: 'Obtention prévue 2026',
+    title: 'Bachelor Informatique',
+    school: 'ESGI — École supérieure de génie informatique, Reims',
+  },
+  {
+    year: '2023',
+    title: 'Baccalauréat technologique',
+    school: 'Lycée Roosevelt, Reims',
+  },
+  {
+    year: '2021',
+    title: 'Brevet national de jeune sapeur-pompier',
+    school: 'UDJSP51, Suippes',
+  },
+]
 </script>

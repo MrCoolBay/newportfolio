@@ -39,7 +39,7 @@ const SECURITY_HEADERS = {
 }
 
 export default defineNuxtConfig({
-  compatibilityDate: '2026-09-07',
+  compatibilityDate: '2026-09-08',
 
   modules: [
     '@nuxt/eslint',
@@ -63,7 +63,7 @@ export default defineNuxtConfig({
   // Source unique de vérité pour robots/sitemap (nuxt-site-config)
   site: {
     url: SITE_URL,
-    name: 'Fabien Lubin - Développeur Full Stack',
+    name: 'Fabien Lubin — Développeur full-stack freelance',
   },
 
   runtimeConfig: {
@@ -121,34 +121,36 @@ export default defineNuxtConfig({
   },
 
   sitemap: {
-    exclude: ['/api/**'],
+    // La page légale porte un `noindex` : l'exclure du sitemap évite
+    // d'envoyer aux moteurs une URL qu'on leur demande d'ignorer.
+    exclude: ['/api/**', '/mentions-legales'],
     autoLastmod: true,
   },
 
   app: {
     head: {
       htmlAttrs: { lang: 'fr' },
-      title: 'Fabien Lubin - Développeur Full Stack',
+      title: 'Fabien Lubin — Développeur full-stack freelance',
       titleTemplate: '%s | Fabien Lubin',
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
         {
           name: 'description',
-          content: 'Portfolio de Fabien Lubin, développeur Full Stack passionné par la création d\'expériences web modernes et innovantes.',
+          content: 'Fabien Lubin, développeur full-stack freelance à Reims. Sites vitrines, applications web et API en Vue.js / Nuxt et FastAPI. Disponible pour vos missions.',
         },
         { property: 'og:type', content: 'website' },
         { property: 'og:url', content: SITE_URL },
         { property: 'og:locale', content: 'fr_FR' },
-        { property: 'og:title', content: 'Fabien Lubin - Développeur Full Stack' },
-        { property: 'og:description', content: 'Portfolio de Fabien Lubin, développeur Full Stack passionné par la création d\'expériences web modernes et innovantes.' },
+        { property: 'og:title', content: 'Fabien Lubin — Développeur full-stack freelance' },
+        { property: 'og:description', content: 'Fabien Lubin, développeur full-stack freelance à Reims. Sites vitrines, applications web et API en Vue.js / Nuxt et FastAPI. Disponible pour vos missions.' },
         { property: 'og:image', content: `${SITE_URL}/og-image.jpg` },
         { name: 'twitter:card', content: 'summary_large_image' },
-        { name: 'twitter:title', content: 'Fabien Lubin - Développeur Full Stack' },
-        { name: 'twitter:description', content: 'Portfolio de Fabien Lubin, développeur Full Stack passionné par la création d\'expériences web modernes et innovantes.' },
+        { name: 'twitter:title', content: 'Fabien Lubin — Développeur full-stack freelance' },
+        { name: 'twitter:description', content: 'Fabien Lubin, développeur full-stack freelance à Reims. Sites vitrines, applications web et API en Vue.js / Nuxt et FastAPI. Disponible pour vos missions.' },
         { name: 'twitter:image', content: `${SITE_URL}/og-image.jpg` },
         { name: 'format-detection', content: 'telephone=no' },
-        { name: 'theme-color', content: '#4F46E5' },
+        { name: 'theme-color', content: '#18181b' },
       ],
       link: [
         { rel: 'canonical', href: SITE_URL },

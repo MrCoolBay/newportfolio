@@ -1,200 +1,226 @@
 <template>
-  <main class="relative min-h-screen overflow-hidden">
-    <!-- Background grid -->
-    <div class="fixed inset-0">
-      <div class="absolute inset-0 grid grid-cols-[repeat(auto-fill,minmax(50px,1fr))] grid-rows-[repeat(auto-fill,minmax(50px,1fr))]">
-        <div v-for="i in 100" :key="i" class="border border-gray-100/5" />
-      </div>
-    </div>
+  <main class="min-h-screen">
+    <div class="container mx-auto max-w-6xl px-4">
+      <!-- Hero -->
+      <section class="flex flex-col items-start gap-12 pt-28 lg:flex-row lg:gap-16">
+        <!-- Présentation : passe en premier sur mobile, l'éditeur est décoratif -->
+        <div class="order-1 lg:order-2 lg:w-1/2 lg:pt-8">
+          <p
+            v-motion
+            class="inline-flex items-center gap-2 rounded-full border border-accent-600/30 bg-accent-500/10 px-3 py-1 font-mono text-xs text-accent-700"
+            :initial="{ opacity: 0, y: 10 }"
+            :enter="{ opacity: 1, y: 0 }"
+          >
+            <span class="h-1.5 w-1.5 rounded-full bg-accent-600" />
+            Disponible pour des missions freelance
+          </p>
 
-    <!-- Contenu principal -->
-    <div class="container mx-auto">
-      <section class="min-h-screen relative flex -mb-30">
-        <!-- Zone de code interactive -->
-        <div class="grow flex flex-col lg:flex-row items-start gap-8 pt-32 px-4 lg:px-16">
-          <!-- Conteneur pour le jeu et l'éditeur -->
-          <div class="lg:w-1/2 relative">
-            <!-- Jeu Snake en arrière-plan -->
-            <div
-                class="absolute inset-0 overflow-hidden rounded-lg transition-opacity duration-500 bg-[#1E1E1E]"
-                :class="{'opacity-100 z-10': showSnake, 'opacity-0 -z-10': !showSnake}"
+          <h1
+            v-motion
+            class="mt-6 text-5xl font-bold text-ink lg:text-6xl"
+            :initial="{ opacity: 0, x: 30 }"
+            :enter="{ opacity: 1, x: 0, transition: { delay: 100 } }"
+          >
+            Fabien Lubin
+          </h1>
+
+          <p
+            v-motion
+            class="mt-3 font-mono text-lg text-accent-700"
+            :initial="{ opacity: 0, x: 30 }"
+            :enter="{ opacity: 1, x: 0, transition: { delay: 200 } }"
+          >
+            Développeur full-stack
+          </p>
+
+          <p
+            v-motion
+            class="mt-6 max-w-lg leading-relaxed text-ink-soft"
+            :initial="{ opacity: 0, x: 30 }"
+            :enter="{ opacity: 1, x: 0, transition: { delay: 300 } }"
+          >
+            Spécialisé Vue.js / Nuxt et FastAPI. Je conçois des applications web
+            performantes et sécurisées, de la maquette à la mise en production.
+            Basé à Reims, en alternance en cyberdéfense et disponible en freelance.
+          </p>
+
+          <div
+            v-motion
+            class="mt-8 flex flex-wrap gap-3"
+            :initial="{ opacity: 0, y: 10 }"
+            :enter="{ opacity: 1, y: 0, transition: { delay: 400 } }"
+          >
+            <NuxtLink
+              to="/contact"
+              class="inline-flex items-center gap-2 rounded-lg bg-ink px-5 py-3 font-mono text-sm text-white transition-colors hover:bg-accent-700"
             >
-              <SnakeGame v-if="showSnake" ref="snakeGame" />
+              <span>Me contacter</span>
+              <Icon name="heroicons:arrow-right" class="h-4 w-4" />
+            </NuxtLink>
+            <NuxtLink
+              to="/projects"
+              class="inline-flex items-center gap-2 rounded-lg border border-zinc-300 px-5 py-3 font-mono text-sm text-ink transition-colors hover:border-accent-600 hover:text-accent-700"
+            >
+              Voir mes projets
+            </NuxtLink>
+          </div>
+        </div>
+
+        <!-- Éditeur décoratif. Cliquer sur la pastille rouge ou jaune réduit la
+             fenêtre et révèle un Snake : easter egg volontaire. -->
+        <div class="order-2 w-full lg:order-1 lg:w-1/2">
+          <div class="relative">
+            <div
+              class="absolute inset-0 overflow-hidden rounded-lg bg-shell transition-opacity duration-500"
+              :class="showSnake ? 'z-10 opacity-100' : '-z-10 opacity-0'"
+            >
+              <SnakeGame v-if="showSnake" />
             </div>
 
-            <!-- Éditeur de code avec animation -->
             <div
-                class="relative w-full transition-all duration-500 transform cursor-pointer"
-                :class="{
-                  'scale-75 translate-x-20 translate-y-20': isMinimized,
-                  'scale-100': !isMinimized
-                }"
-                @click="isMinimized ? restoreWindow() : null"
+              class="relative w-full transform cursor-pointer transition-all duration-500"
+              :class="{ 'translate-x-16 translate-y-16 scale-75': isMinimized }"
+              @click="isMinimized ? restore() : null"
             >
               <div
-v-motion
-                   class="bg-[#1E1E1E] rounded-lg overflow-hidden shadow-xl"
-                   :initial="{ opacity: 0, y: 20 }"
-                   :enter="{ opacity: 1, y: 0, transition: { delay: 200 } }"
-                   :duration="1000"
+                v-motion
+                class="overflow-hidden rounded-lg bg-shell shadow-xl"
+                :initial="{ opacity: 0, y: 20 }"
+                :enter="{ opacity: 1, y: 0, transition: { delay: 200 } }"
               >
-                <!-- Barre de titre -->
-                <div class="flex items-center gap-2 p-4 bg-[#1A1A1A]">
+                <div class="flex items-center gap-2 bg-shell-bar p-4">
                   <button
-                      class="cursor-pointer w-3 h-3 rounded-full bg-red-500 hover:bg-red-600 transition-colors"
-                      @click="toggleMinimize"
+                    type="button"
+                    aria-label="Réduire la fenêtre"
+                    class="h-3 w-3 cursor-pointer rounded-full bg-red-500 transition-colors hover:bg-red-600"
+                    @click="minimize"
                   />
                   <button
-                      class="cursor-pointer w-3 h-3 rounded-full bg-yellow-500 hover:bg-yellow-600 transition-colors"
-                      @click="toggleMinimize"
+                    type="button"
+                    aria-label="Réduire la fenêtre"
+                    class="h-3 w-3 cursor-pointer rounded-full bg-yellow-500 transition-colors hover:bg-yellow-600"
+                    @click="minimize"
                   />
-                  <div class="w-3 h-3 rounded-full bg-green-500"/>
+                  <span class="h-3 w-3 rounded-full bg-green-500" />
+                  <span class="ml-2 font-mono text-sm text-zinc-500">developer.ts</span>
                 </div>
 
-                <!-- Contenu de l'éditeur -->
                 <div
-                    class="p-6 font-mono text-sm transition-opacity duration-500"
-                    :class="{'opacity-30': isMinimized, 'opacity-100': !isMinimized}"
-
+                  class="p-6 font-mono text-sm transition-opacity duration-500"
+                  :class="isMinimized ? 'opacity-30' : 'opacity-100'"
                 >
-                  <div class="space-y-4">
-                    <div>
-                      <span class="text-pink-400">import</span>
-                      <span class="text-white"> { ref } </span>
-                      <span class="text-pink-400">from</span>
-                      <span class="text-green-400"> 'vue'</span>
-                    </div>
-
-                    <div class="text-blue-400">
-                      const <span class="text-white">developer</span> = {
-                    </div>
-
-                    <div class="pl-6 space-y-2">
-                      <div>
-                        <span class="text-blue-400">name:</span>
-                        <span class="text-green-400"> "Fabien Lubin"</span>,
-                      </div>
-                      <div>
-                        <span class="text-blue-400">role:</span>
-                        <span class="text-green-400"> "Full Stack Developer"</span>,
-                      </div>
-                      <div>
-                        <span class="text-blue-400">stack:</span> [
-                        <span class="text-green-400">"Vue.js", "Nuxt", "Node.js"</span>],
-                      </div>
-                      <div>
-                        <span class="text-blue-400">location:</span>
-                        <span class="text-green-400"> "France"</span>
-                      </div>
-                    </div>
-
-                    <div class="text-blue-400">}</div>
-                  </div>
-
-                  <!-- Terminal intégré -->
-                  <div class="mt-8 pt-4 border-t border-gray-700">
-                    <div class="space-y-3">
-                      <NuxtLink
-                          to="/projects"
-                          class="flex items-center gap-2 hover:bg-white/5 p-2 rounded-sm transition-colors"
-                      >
-                        <span class="text-gray-500">$</span>
-                        <span class="text-blue-400">npm run</span>
-                        <span class="text-emerald-400">projects</span>
-                      </NuxtLink>
-
-                      <NuxtLink
-                          to="/contact"
-                          class="flex items-center gap-2 hover:bg-white/5 p-2 rounded-sm transition-colors"
-                      >
-                        <span class="text-gray-500">$</span>
-                        <span class="text-blue-400">npm run</span>
-                        <span class="text-emerald-400">contact</span>
-                      </NuxtLink>
-                    </div>
+                  <div class="space-y-1 text-zinc-300">
+                    <p>
+                      <span class="text-accent-400">const</span>
+                      <span class="text-white"> developer </span>= {
+                    </p>
+                    <p class="pl-6">
+                      <span class="text-sky-400">name</span>:
+                      <span class="text-emerald-400">'Fabien Lubin'</span>,
+                    </p>
+                    <p class="pl-6">
+                      <span class="text-sky-400">stack</span>: [<span class="text-emerald-400">'Nuxt'</span>, <span class="text-emerald-400">'FastAPI'</span>, <span class="text-emerald-400">'Docker'</span>],
+                    </p>
+                    <p class="pl-6">
+                      <span class="text-sky-400">based</span>:
+                      <span class="text-emerald-400">'Reims, FR'</span>,
+                    </p>
+                    <p class="pl-6">
+                      <span class="text-sky-400">freelance</span>:
+                      <span class="text-accent-400">true</span>
+                    </p>
+                    <p>}</p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-
-          <!-- Zone de présentation -->
-          <div class="lg:w-1/2 pt-8 lg:pt-20"
-
-          >
-            <h1 class="space-y-4">
-             <span
-v-motion
-                   class="block text-4xl lg:text-6xl font-bold text-gray-800"
-                   :initial="{ opacity: 0, x: 50 }"
-                   :enter="{ opacity: 1, x: 0, transition: { delay: 200 } }"
-                   :duration="1000"
-             >
-               Je suis
-             </span>
-              <span
-v-motion
-                    class="block text-5xl lg:text-7xl font-bold text-transparent bg-clip-text bg-linear-to-r from-blue-600 to-purple-600"
-                    :initial="{ opacity: 0, x: 50 }"
-                    :enter="{ opacity: 1, x: 0, transition: { delay: 400 } }"
-                    :duration="1000"
-              >
-               Fabien Lubin
-             </span>
-            </h1>
-
-            <p
-v-motion
-               class="mt-6 text-lg text-gray-600 max-w-lg"
-               :initial="{ opacity: 0, x: 50,  }"
-               :enter="{ opacity: 1, x: 0, transition: { delay: 600 } }"
-               :duration="1000"
-            >
-              // Développeur Full Stack passionné par la création d'expériences web modernes et innovantes
-            </p>
-          </div>
         </div>
       </section>
-      <TechStack/>
+
+      <!-- Prestations : volet vitrine de l'auto-entreprise -->
+      <section class="pt-28">
+        <h2 class="text-2xl font-bold text-ink">Prestations</h2>
+        <div class="relative mt-4 h-px w-full bg-zinc-200">
+          <div class="absolute inset-y-0 left-0 w-16 bg-accent-600" />
+        </div>
+
+        <div class="mt-10 grid gap-6 md:grid-cols-3">
+          <article
+            v-for="(service, index) in services"
+            :key="service.title"
+            v-motion
+            class="rounded-xl border border-zinc-200 p-6 transition-colors hover:border-accent-600/50"
+            :initial="{ opacity: 0, y: 20 }"
+            :enter="{ opacity: 1, y: 0, transition: { delay: index * 120 } }"
+          >
+            <Icon :name="service.icon" class="h-6 w-6 text-accent-600" />
+            <h3 class="mt-4 font-semibold text-ink">{{ service.title }}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-ink-soft">{{ service.description }}</p>
+          </article>
+        </div>
+      </section>
+
+      <TechStack />
     </div>
   </main>
 </template>
 
 <script setup>
+useHead({ title: 'Développeur full-stack freelance à Reims' })
+
 const isMinimized = ref(false)
 const showSnake = ref(false)
-const snakeGame = ref(null)
+let revealTimer
 
-// Restaurer la fenêtre
-const restoreWindow = () => {
+function minimize() {
+  isMinimized.value = true
+  clearTimeout(revealTimer)
+  revealTimer = setTimeout(() => {
+    showSnake.value = true
+  }, 300)
+}
+
+function restore() {
+  clearTimeout(revealTimer)
   isMinimized.value = false
   showSnake.value = false
 }
 
-const toggleMinimize = () => {
-  isMinimized.value = !isMinimized.value
-  if (isMinimized.value) {
-    setTimeout(() => {
-      showSnake.value = true
-    }, 300)
-  } else {
-    showSnake.value = false
+// Le Snake capte les flèches : empêcher la page de défiler pendant la partie.
+function preventScroll(event) {
+  if (showSnake.value && ['ArrowUp', 'ArrowDown', 'Space', ' '].includes(event.key)) {
+    event.preventDefault()
   }
 }
 
-// Empêcher le scroll avec les flèches
-const preventScroll = (e) => {
-  if (showSnake.value && ["ArrowUp", "ArrowDown", "Space"].includes(e.key)) {
-    e.preventDefault()
-  }
-}
-
-// Ajouter et nettoyer les event listeners
-onMounted(() => {
-  window.addEventListener('keydown', preventScroll)
-})
-
+onMounted(() => window.addEventListener('keydown', preventScroll))
 onUnmounted(() => {
   window.removeEventListener('keydown', preventScroll)
+  clearTimeout(revealTimer)
 })
+
+const services = [
+  {
+    title: 'Sites vitrines',
+    icon: 'heroicons:window',
+    description:
+      'Site rapide, responsive et bien référencé, de la maquette à la mise en '
+      + 'ligne. Vous restez autonome sur vos contenus.',
+  },
+  {
+    title: 'Applications & API',
+    icon: 'heroicons:code-bracket-square',
+    description:
+      'Applications métier et API sur mesure en Nuxt, Node.js ou FastAPI, '
+      + 'testées et documentées.',
+  },
+  {
+    title: 'Sécurité & déploiement',
+    icon: 'heroicons:shield-check',
+    description:
+      'Durcissement, revue de code, conteneurisation Docker et pipelines '
+      + "CI/CD pour livrer sans mauvaise surprise.",
+  },
+]
 </script>
