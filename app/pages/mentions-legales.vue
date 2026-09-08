@@ -6,18 +6,28 @@
       <div class="space-y-10 leading-relaxed text-ink-soft">
         <section>
           <h2 class="text-lg font-semibold text-ink">Éditeur du site</h2>
-          <p class="mt-3">
-            Fabien Lubin — entrepreneur individuel<br>
-            Reims, France<br>
-            <a href="mailto:contact@fabienlubin.fr" class="text-accent-700 hover:underline">
-              contact@fabienlubin.fr
-            </a>
-          </p>
-          <p class="mt-3 rounded-lg border border-accent-600/30 bg-accent-500/5 p-4 text-sm">
-            <strong class="text-ink">À compléter :</strong> numéro SIREN/SIRET, adresse de
-            l'établissement et, le cas échéant, numéro de TVA intracommunautaire.
-            Ces mentions sont obligatoires pour un site professionnel
-            (articles 6-III de la LCEN et L.123-1 du code de commerce).
+          <dl class="mt-4 space-y-3">
+            <div v-for="row in publisher" :key="row.label" class="flex flex-col gap-1 sm:flex-row sm:gap-4">
+              <dt class="w-56 shrink-0 font-mono text-sm text-ink-muted">{{ row.label }}</dt>
+              <dd>
+                <a
+                  v-if="row.mailto"
+                  :href="`mailto:${row.value}`"
+                  class="text-accent-700 hover:underline"
+                >{{ row.value }}</a>
+                <span v-else>{{ row.value }}</span>
+              </dd>
+            </div>
+          </dl>
+          <p class="mt-4 text-sm">
+            Les informations d'immatriculation, dont l'adresse du siège, sont
+            consultables sur
+            <a
+              :href="`https://annuaire-entreprises.data.gouv.fr/entreprise/${SIREN}`"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-accent-700 hover:underline"
+            >l'annuaire des entreprises</a>, service public de la DINUM.
           </p>
         </section>
 
@@ -81,4 +91,20 @@
 useHead({ title: 'Mentions légales' })
 // Page légale : sans intérêt pour l'indexation, mais elle doit rester atteignable.
 useSeoMeta({ robots: 'noindex, follow' })
+
+const SIREN = '988265195'
+
+/**
+ * L'adresse du siège n'est volontairement pas publiée : c'est une adresse
+ * personnelle, et l'exposer sur une page web la rend directement moissonnable.
+ * Le SIREN renvoie à l'annuaire officiel, où elle figure déjà — l'information
+ * reste donc accessible à qui la cherche légitimement.
+ */
+const publisher = [
+  { label: 'Éditeur', value: 'Fabien Lubin — Entrepreneur individuel (EI)' },
+  { label: 'SIREN', value: '988 265 195' },
+  { label: 'Activité (code APE)', value: '62.01Z — Programmation informatique' },
+  { label: 'Immatriculation au RNE', value: '19 juin 2025' },
+  { label: 'Contact', value: 'contact@fabienlubin.fr', mailto: true },
+]
 </script>
