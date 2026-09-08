@@ -3,15 +3,45 @@
     <div class="mx-auto max-w-7xl">
       <div class="rounded-2xl border border-zinc-200/60 bg-white/80 shadow-sm backdrop-blur-md">
         <div class="flex h-16 items-center justify-between px-6">
-          <!-- Logo. L'ancienne version empilait deux copies complètes de six
-               spans dégradés pour un effet de survol : ~100 lignes pour un
-               résultat qu'un simple changement de couleur obtient. -->
+          <!--
+            Logo : `/FabienLubin>` se replie en `/FL>` au défilement, à tous les
+            formats d'écran.
+
+            La version précédente utilisait `hidden sm:inline`, ce qui annulait
+            l'effet au-delà de 640 px et, en dessous, masquait « Fabien » pour
+            ne laisser que « /Lubin> ».
+
+            `items-center` plutôt que `items-baseline` : un élément flex en
+            `overflow-hidden` voit sa ligne de base synthétisée depuis son bord
+            de bordure, ce qui décalerait verticalement les lettres pendant le
+            repli. Toutes les parties partageant la même fonte et la même
+            taille, le centrage vertical est équivalent et stable.
+
+            Largeurs en `ch` : en monospace, 1ch vaut exactement une gouttière
+            de caractère, donc `5ch` est la largeur juste d'« abien ». Une
+            valeur en rem trop généreuse laisserait un temps mort au début de la
+            transition, pendant lequel la contrainte reste au-dessus de la
+            largeur réelle du texte.
+
+            Les lettres repliées restent dans le DOM : un lecteur d'écran
+            annonce toujours le nom complet.
+          -->
           <NuxtLink
             to="/"
-            class="font-mono text-xl font-bold text-ink transition-colors hover:text-accent-600"
+            class="inline-flex items-center font-mono text-xl font-bold text-ink transition-colors hover:text-accent-600"
           >
             <span class="text-accent-600">/</span>
-            <span :class="{ 'hidden sm:inline': isScrolled }">Fabien</span>Lubin<span class="text-accent-600">&gt;</span>
+            <span>F</span>
+            <span
+              class="overflow-hidden whitespace-nowrap transition-all duration-300 ease-out"
+              :class="isScrolled ? 'max-w-0 opacity-0' : 'max-w-[5ch] opacity-100'"
+            >abien</span>
+            <span>L</span>
+            <span
+              class="overflow-hidden whitespace-nowrap transition-all duration-300 ease-out"
+              :class="isScrolled ? 'max-w-0 opacity-0' : 'max-w-[4ch] opacity-100'"
+            >ubin</span>
+            <span class="text-accent-600">&gt;</span>
           </NuxtLink>
 
           <!-- Navigation bureau -->
@@ -99,20 +129,39 @@
 </template>
 
 <script setup>
-import { useScroll } from '@vueuse/core'
-
 const route = useRoute()
 const isOpen = ref(false)
 const isScrolled = ref(false)
 
-// `useScroll` a besoin de `window` : le composant n'est monté qu'au client
-// pour la partie scroll, et le rendu SSR part de `isScrolled = false`.
+/**
+ * Détection du défilement par écouteur natif.
+ *
+ * `useScroll` de VueUse était l'unique usage de `@vueuse/core` dans tout le
+ * projet, et il imposait de différer son appel à `onMounted` puisque `window`
+ * n'existe pas au rendu serveur. Quinze lignes remplacent la dépendance.
+ *
+ * `passive: true` empêche l'écouteur de retarder le défilement, et le
+ * regroupement par `requestAnimationFrame` évite de réévaluer à chaque
+ * événement.
+ */
+const SCROLL_THRESHOLD = 50
+let pending = false
+
+function readScroll() {
+  if (pending) return
+  pending = true
+  requestAnimationFrame(() => {
+    isScrolled.value = window.scrollY > SCROLL_THRESHOLD
+    pending = false
+  })
+}
+
 onMounted(() => {
-  const { y } = useScroll(window)
-  watch(y, (value) => {
-    isScrolled.value = value > 50
-  }, { immediate: true })
+  readScroll()
+  window.addEventListener('scroll', readScroll, { passive: true })
 })
+
+onUnmounted(() => window.removeEventListener('scroll', readScroll))
 
 // Referme le menu mobile à la navigation.
 watch(() => route.path, () => {
