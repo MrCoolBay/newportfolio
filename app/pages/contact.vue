@@ -174,7 +174,22 @@
 </template>
 
 <script setup>
-useHead({ title: 'Contact' })
+useSeoMeta({
+  title: 'Contact et devis',
+  description:
+    'Contactez Fabien Lubin, développeur full-stack freelance à Reims. Devis '
+    + 'gratuit pour un site vitrine, une application web ou mobile. Réponse sous 48 h.',
+  ogType: 'website',
+})
+
+useSchemaOrg([
+  defineBreadcrumb({
+    itemListElement: [
+      { name: 'Accueil', item: '/' },
+      { name: 'Contact', item: '/contact' },
+    ],
+  }),
+])
 
 const fieldClass = 'w-full rounded-lg border border-zinc-700 bg-zinc-800/50 px-4 py-2 focus:border-accent-500 focus:outline-hidden'
 

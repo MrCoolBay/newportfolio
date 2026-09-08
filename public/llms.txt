@@ -1,0 +1,52 @@
+# Fabien Lubin — développeur full-stack freelance
+
+> Développeur full-stack basé à Reims (Grand Est, France). Spécialisé Vue.js /
+> Nuxt et FastAPI, également en mobile React Native (iOS et Android).
+> Disponible pour des missions freelance. Entrepreneur individuel,
+> SIREN 988265195, immatriculé le 19 juin 2025, code APE 62.01Z
+> (programmation informatique).
+
+## Prestations
+
+- **Sites vitrines** — site rapide, responsive et référencé, de la maquette à la mise en ligne.
+- **Applications mobiles** — iOS et Android en React Native, une seule base de code.
+- **Applications web et API** — Nuxt, Node.js ou FastAPI, testées et documentées.
+- **Sécurité et déploiement** — durcissement, revue de code, Docker, pipelines CI/CD.
+
+Zone d'intervention : Reims et le Grand Est sur place, toute la France à distance.
+Devis gratuit après un premier échange. Réponse sous 48 heures ouvrées.
+
+## Compétences
+
+Vue.js, Nuxt, TypeScript, React Native, Node.js, PHP, Python, FastAPI, Docker,
+intégration continue, cybersécurité applicative, administration Linux.
+
+## Parcours
+
+- Alternance développeur full-stack chez France CyberDefense, depuis décembre 2025.
+- Alternance développeur full-stack chez Agreego, de février à décembre 2025.
+- Stage développeur full-stack chez HK-Tech, juin à août 2024.
+- Sapeur-pompier volontaire au SDIS de la Marne, depuis septembre 2021.
+
+Formation : Master 1 Informatique en cours à l'ESGI Reims, Bachelor Informatique
+obtenu en 2026. Anglais niveau B2 (TOEIC).
+
+## Réalisations
+
+- [L'Univers — Sedan](https://www.lunivers-sedan.fr) — site vitrine d'un bar
+  sedanais fondé en 1932. Nuxt, Vue 3, déployé sur Vercel.
+- [fabienlubin.fr](https://github.com/MrCoolBay/newportfolio) — ce site, en code
+  ouvert. Nuxt 4, Tailwind 4, endpoint de contact durci, campagne de tests de
+  sécurité rejouable.
+
+## Pages
+
+- [Accueil](https://www.fabienlubin.fr/) — présentation et prestations.
+- [Parcours](https://www.fabienlubin.fr/about) — expériences, compétences, formation.
+- [Projets](https://www.fabienlubin.fr/projects) — réalisations et activité GitHub.
+- [Contact](https://www.fabienlubin.fr/contact) — formulaire et devis.
+- [Mentions légales](https://www.fabienlubin.fr/mentions-legales)
+
+## Contact
+
+contact@fabienlubin.fr

@@ -52,7 +52,22 @@
 </template>
 
 <script setup>
-useHead({ title: 'Projets' })
+useSeoMeta({
+  title: 'Projets et réalisations',
+  description:
+    "Réalisations de Fabien Lubin, développeur freelance à Reims : site vitrine "
+    + "du bar L'Univers à Sedan en Nuxt, et ce portfolio en code ouvert.",
+  ogType: 'website',
+})
+
+useSchemaOrg([
+  defineBreadcrumb({
+    itemListElement: [
+      { name: 'Accueil', item: '/' },
+      { name: 'Projets', item: '/projects' },
+    ],
+  }),
+])
 
 /**
  * Les stacks listées sont celles réellement servies par chaque site

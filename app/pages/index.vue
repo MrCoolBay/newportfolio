@@ -163,12 +163,20 @@
       </section>
 
       <TechStack />
+
+      <TheFaq />
     </div>
   </main>
 </template>
 
 <script setup>
-useHead({ title: 'Développeur full-stack freelance à Reims' })
+useSeoMeta({
+  title: 'Développeur full-stack freelance à Reims',
+  description:
+    'Développeur full-stack freelance à Reims : sites vitrines, applications web '
+    + 'et mobiles iOS/Android, API. Vue.js, Nuxt, FastAPI, React Native.',
+  ogType: 'website',
+})
 
 const isMinimized = ref(false)
 const showSnake = ref(false)
