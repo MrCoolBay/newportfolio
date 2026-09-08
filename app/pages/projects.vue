@@ -16,6 +16,15 @@
         />
       </div>
 
+      <!-- Activité GitHub, servie par notre propre API pour rester dans la CSP -->
+      <div class="mt-16">
+        <h2 class="text-xl font-semibold text-ink">Activité GitHub</h2>
+        <div class="relative mt-4 mb-8 h-px w-full bg-zinc-200">
+          <div class="absolute inset-y-0 left-0 w-16 bg-accent-600" />
+        </div>
+        <GitHubPanel />
+      </div>
+
       <!-- Passerelle vers la prestation : la page projets est le premier
            endroit où un prospect atterrit depuis une recherche. -->
       <section

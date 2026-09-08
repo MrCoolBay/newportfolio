@@ -106,6 +106,19 @@ Le périmètre compte pour calibrer une gravité : sans session ni action
 authentifiée, un « contournement CSRF » sur le formulaire de contact relève de
 l'abus, pas de la vulnérabilité.
 
+`server/api/github.get.ts` est une exception assumée à l'ordre des contrôles :
+c'est un GET sans entrée utilisateur, donc sans surface d'injection. Il n'a pas
+besoin de validation Zod. Ce qui compte pour lui : garder le cache serveur
+(l'API GitHub non authentifiée plafonne à 60 requêtes/heure et par IP), borner
+les champs venus de GitHub, et se masquer côté client en cas d'échec plutôt que
+de casser la page. Ne jamais y introduire de jeton d'accès : le site est public
+et n'en a pas besoin.
+
+**Aucune ressource tierce dans le navigateur.** La CSP est en `default-src
+'self'` et `img-src 'self' data:`. Les cartes GitHub toutes faites
+(github-readme-stats, ghchart…) sont des images distantes : elles seraient
+bloquées. Passer par une route serveur, comme pour le résumé GitHub.
+
 ## Secrets
 
 Ne pas lire `.env` : son contenu atterrirait dans l'historique de la
