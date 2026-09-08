@@ -4,7 +4,7 @@
       <PageHeader
         title="Parcours"
         module="about"
-        subtitle="Développeur full-stack spécialisé Vue.js / Nuxt et FastAPI. Je combine front-end et back-end pour livrer des solutions complètes, sobres et sécurisées."
+        subtitle="Développeur full-stack spécialisé Vue.js / Nuxt et FastAPI, également en mobile React Native. Je combine front-end, back-end et applications natives pour livrer des solutions complètes, sobres et sécurisées."
       />
 
       <div class="grid gap-16 lg:grid-cols-[1.4fr_1fr]">
@@ -101,7 +101,7 @@
             <h2 class="text-xl font-semibold text-ink">Langues</h2>
             <ul class="mt-4 space-y-2 text-sm text-ink-soft">
               <li>Français — langue maternelle</li>
-              <li>Anglais — niveau intermédiaire</li>
+              <li>Anglais — B2 (TOEIC)</li>
             </ul>
           </section>
         </div>
@@ -170,6 +170,7 @@ const experiences = [
 
 const skills = [
   { label: 'Vue.js, Nuxt, TypeScript' },
+  { label: 'React Native (iOS / Android)' },
   { label: 'Node.js, PHP' },
   { label: 'Python, FastAPI' },
   { label: 'Docker, pipelines CI/CD' },
@@ -179,7 +180,12 @@ const skills = [
 
 const education = [
   {
-    year: 'Obtention prévue 2026',
+    year: 'En cours',
+    title: 'Master 1 Informatique',
+    school: 'ESGI — École supérieure de génie informatique, Reims',
+  },
+  {
+    year: 'Obtenu en 2026',
     title: 'Bachelor Informatique',
     school: 'ESGI — École supérieure de génie informatique, Reims',
   },

@@ -39,9 +39,10 @@
             :initial="{ opacity: 0, x: 30 }"
             :enter="{ opacity: 1, x: 0, transition: { delay: 300 } }"
           >
-            Spécialisé Vue.js / Nuxt et FastAPI. Je conçois des applications web
-            performantes et sécurisées, de la maquette à la mise en production.
-            Basé à Reims, en alternance en cyberdéfense et disponible en freelance.
+            Spécialisé Vue.js / Nuxt et FastAPI, et en mobile React Native. Je
+            conçois des applications web et natives performantes et sécurisées, de
+            la maquette à la mise en production. Basé à Reims, en alternance en
+            cyberdéfense et disponible en freelance.
           </p>
 
           <div
@@ -119,7 +120,7 @@
                       <span class="text-emerald-400">'Fabien Lubin'</span>,
                     </p>
                     <p class="pl-6">
-                      <span class="text-sky-400">stack</span>: [<span class="text-emerald-400">'Nuxt'</span>, <span class="text-emerald-400">'FastAPI'</span>, <span class="text-emerald-400">'Docker'</span>],
+                      <span class="text-sky-400">stack</span>: [<span class="text-emerald-400">'Nuxt'</span>, <span class="text-emerald-400">'FastAPI'</span>, <span class="text-emerald-400">'React Native'</span>],
                     </p>
                     <p class="pl-6">
                       <span class="text-sky-400">based</span>:
@@ -145,7 +146,7 @@
           <div class="absolute inset-y-0 left-0 w-16 bg-accent-600" />
         </div>
 
-        <div class="mt-10 grid gap-6 md:grid-cols-3">
+        <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           <article
             v-for="(service, index) in services"
             :key="service.title"
@@ -207,6 +208,13 @@ const services = [
     description:
       'Site rapide, responsive et bien référencé, de la maquette à la mise en '
       + 'ligne. Vous restez autonome sur vos contenus.',
+  },
+  {
+    title: 'Applications mobiles',
+    icon: 'heroicons:device-phone-mobile',
+    description:
+      'Applications iOS et Android en React Native, une seule base de code '
+      + 'pour les deux plateformes.',
   },
   {
     title: 'Applications & API',

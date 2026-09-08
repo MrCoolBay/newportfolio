@@ -33,6 +33,7 @@
 const technologies = [
   { name: 'Vue.js', icon: 'logos:vue', description: 'Interfaces réactives, composants réutilisables' },
   { name: 'Nuxt', icon: 'logos:nuxt-icon', description: 'Rendu serveur, routage, API intégrée' },
+  { name: 'React Native', icon: 'logos:react', description: 'Applications iOS et Android multiplateformes' },
   { name: 'TypeScript', icon: 'logos:typescript-icon', description: 'Typage statique, POO' },
   { name: 'FastAPI', icon: 'simple-icons:fastapi', description: 'API Python asynchrones et documentées' },
   { name: 'Tailwind CSS', icon: 'logos:tailwindcss-icon', description: 'Design system utilitaire' },
