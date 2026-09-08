@@ -111,7 +111,22 @@
 </template>
 
 <script setup>
-useHead({ title: 'Parcours' })
+useSeoMeta({
+  title: 'Parcours et compétences',
+  description:
+    'Parcours de Fabien Lubin, développeur full-stack : alternance en '
+    + "cyberdéfense, Master 1 à l'ESGI Reims, Vue.js, Nuxt, FastAPI, React Native.",
+  ogType: 'profile',
+})
+
+useSchemaOrg([
+  defineBreadcrumb({
+    itemListElement: [
+      { name: 'Accueil', item: '/' },
+      { name: 'Parcours', item: '/about' },
+    ],
+  }),
+])
 
 /**
  * ATTENTION — les missions listées pour France CyberDefense sont déduites du

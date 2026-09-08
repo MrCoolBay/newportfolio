@@ -21,41 +21,42 @@ const shortText = 'FL>'
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 
+/**
+ * Budget total : ~1,2 s, contre ~5,8 s auparavant.
+ *
+ * L'ancienne version couvrait tout l'écran d'un calque blanc opaque pendant
+ * près de six secondes, en bloquant le défilement. Pour un visiteur arrivant
+ * d'une recherche, le site était une page blanche : le Largest Contentful
+ * Paint mesurait le calque, pas le contenu, et la majorité des visites
+ * partaient avant la fin de l'animation.
+ *
+ * Le verrou `overflow: hidden` sur le body est également supprimé : rien ne
+ * doit empêcher un visiteur de défiler vers le contenu.
+ */
 const animateText = async () => {
-  await sleep(400)
-
   for (let i = 0; i <= fullText.length; i++) {
     displayedText.value = fullText.slice(0, i)
-    await sleep(150)
+    await sleep(45)
   }
 
-  await sleep(800)
-
-  for (let i = fullText.length; i > 1; i--) {
-    displayedText.value = fullText.slice(0, i)
-    await sleep(75)
-  }
-
+  await sleep(180)
   displayedText.value = shortText
 
-  await sleep(800)
-
+  await sleep(160)
   isFading.value = true
 
-  await sleep(1000)
+  await sleep(300)
   isVisible.value = false
-  // S'assurer que le scroll est réactivé
-  document.body.style.overflow = ''
 }
 
+// Respecte `prefers-reduced-motion` : l'animation est purement décorative.
 onMounted(() => {
-  document.body.style.overflow = 'hidden'
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  if (reduced) {
+    isVisible.value = false
+    return
+  }
   animateText()
-})
-
-// Ajouter un cleanup au cas où le composant est détruit avant la fin de l'animation
-onUnmounted(() => {
-  document.body.style.overflow = ''
 })
 </script>
 

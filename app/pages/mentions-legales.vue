@@ -88,9 +88,12 @@
 </template>
 
 <script setup>
-useHead({ title: 'Mentions légales' })
 // Page légale : sans intérêt pour l'indexation, mais elle doit rester atteignable.
-useSeoMeta({ robots: 'noindex, follow' })
+useSeoMeta({
+  title: 'Mentions légales',
+  description: 'Mentions légales du site fabienlubin.fr : éditeur, hébergement, licence et traitement des données.',
+  robots: 'noindex, follow',
+})
 
 const SIREN = '988265195'
 

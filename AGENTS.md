@@ -119,6 +119,32 @@ et n'en a pas besoin.
 (github-readme-stats, ghchart…) sont des images distantes : elles seraient
 bloquées. Passer par une route serveur, comme pour le résumé GitHub.
 
+## SEO — invariants à ne pas casser
+
+- **Jamais de `canonical` dans `nuxt.config.ts`.** Une balise globale rend
+  toutes les pages canoniques vers l'accueil et invite les moteurs à
+  désindexer le reste. La canonical est calculée par route dans `app/app.vue`.
+- **`SITE_URL` désigne `https://www.fabienlubin.fr`**, pas l'apex : celui-ci
+  redirige en 308 et tout signal qui le traverse se dilue.
+- **Chaque page a un titre et une description uniques**, via `useSeoMeta`. Des
+  descriptions dupliquées valent une absence de description.
+- **`public/og-image.png` doit exister** en 1200×630. Régénération :
+  `scripts/generate-og-image.sh` (source `scripts/og-image.svg`). Ne pas
+  installer `nuxt-og-image` : il tire un Chrome headless pour une carte
+  statique.
+- **Le graphe schema.org tient deux entités distinctes** : `Person`
+  (`#identity`) et `ProfessionalService` (`#business`, lié par `founder`). Les
+  fusionner produit un `Organization` porteur de `jobTitle` et `alumniOf`,
+  propriétés réservées à `Person` — graphe invalide.
+- **Aucune adresse postale dans le JSON-LD.** Le signal géographique passe par
+  `areaServed`. Le siège est une adresse personnelle.
+- **Les crawlers d'IA sont autorisés volontairement** dans `robots.groups`, et
+  `public/llms.txt` résume le site pour eux. C'est un choix de visibilité, pas
+  un oubli.
+- **Budget de l'écran de chargement : ~1,2 s maximum**, sans verrou
+  `overflow: hidden` sur le body. Il faisait 5,8 s en calque blanc opaque, ce
+  qui mesurait le calque comme Largest Contentful Paint.
+
 ## Secrets
 
 Ne pas lire `.env` : son contenu atterrirait dans l'historique de la
