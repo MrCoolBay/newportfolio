@@ -1,121 +1,83 @@
 <template>
-  <footer class="relative my-20">
-    <div class="container mx-auto px-4">
-      <!-- Container principal avec glassmorphism léger -->
-      <div class="relative backdrop-blur-md bg-white/70 rounded-2xl p-8 border border-gray-200/20 shadow-lg">
-        <!-- Gradient interactif -->
-        <div
-            class="absolute inset-0 opacity-[0.03] rounded-2xl"
-            :style="{
-            background: `radial-gradient(circle at ${mouseX}px ${mouseY}px, rgb(37, 99, 235), transparent 25%)`
-          }"
-        />
+  <footer class="mt-20 border-t border-zinc-200">
+    <div class="container mx-auto max-w-6xl px-4 py-12">
+      <div class="grid gap-10 md:grid-cols-3">
+        <div>
+          <NuxtLink to="/" class="font-mono text-lg font-bold text-ink">
+            <span class="text-accent-700">/</span>FabienLubin<span class="text-accent-700">&gt;</span>
+          </NuxtLink>
+          <p class="mt-3 text-sm leading-relaxed text-ink-soft">
+            Développeur full-stack à Reims.<br>
+            Disponible pour des missions freelance.
+          </p>
+        </div>
 
-        <!-- Contenu principal -->
-        <div class="relative grid grid-cols-1 md:grid-cols-3 gap-12">
-          <!-- Logo et description -->
-          <div class="space-y-4">
-            <NuxtLink to="/" class="inline-block text-xl font-bold bg-linear-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent">
-              /FabienLubin>
-            </NuxtLink>
-            <p class="text-gray-600 font-mono">
-              // Full Stack Developer<br>
-              // Passionné par le web
-            </p>
-          </div>
-
-          <!-- Navigation -->
-          <div>
-            <h3 class="font-mono text-gray-800 mb-4">navigation.map(</h3>
-            <div class="space-y-2 pl-4">
+        <nav aria-label="Pied de page">
+          <h2 class="font-mono text-sm text-ink">Navigation</h2>
+          <ul class="mt-4 space-y-2 text-sm">
+            <li v-for="item in menuItems" :key="item.name">
               <NuxtLink
-                  v-for="item in menuItems"
-                  :key="item.name"
-                  :to="item.href"
-                  class="block text-gray-600 hover:text-blue-600 transition-colors"
+                :to="item.href"
+                class="text-ink-soft transition-colors hover:text-accent-700"
               >
-                { name: "{{ item.name }}" }
+                {{ item.name }}
               </NuxtLink>
-            </div>
-            <div class="font-mono text-gray-800 mt-4">)</div>
-          </div>
+            </li>
+          </ul>
+        </nav>
 
-          <!-- Réseaux sociaux -->
-          <div>
-            <h3 class="font-mono text-gray-800 mb-4">connect()</h3>
-            <div class="space-y-4 pl-4">
-            <a
+        <div>
+          <h2 class="font-mono text-sm text-ink">Contact</h2>
+          <ul class="mt-4 space-y-2 text-sm">
+            <li>
+              <a
+                href="mailto:contact@fabienlubin.fr"
+                class="text-ink-soft transition-colors hover:text-accent-700"
+              >
+                contact@fabienlubin.fr
+              </a>
+            </li>
+            <li
               v-for="social in socialLinks"
               :key="social.name"
-              :href="social.href"
-              target="_blank"
-              rel="noopener"
-              class="flex items-center gap-3 group text-gray-600 hover:text-blue-600 transition-colors"
+            >
+              <a
+                :href="social.href"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-2 text-ink-soft transition-colors hover:text-accent-700"
               >
-              <Icon :name="social.icon" class="w-5 h-5" />
-              <span class="font-mono">{{ social.name }}</span>
+                <Icon :name="social.icon" class="h-4 w-4" />
+                {{ social.name }}
               </a>
-            </div>
-          </div>
+            </li>
+          </ul>
         </div>
+      </div>
 
-        <!-- Copyright -->
-        <div class="mt-12 pt-4 border-t border-gray-200/20 text-center text-sm text-gray-500 font-mono">
-          © {{ new Date().getFullYear() }} - await developer.code() with ♥
-        </div>
+      <div class="mt-12 flex flex-col gap-3 border-t border-zinc-200 pt-6 text-sm text-ink-muted sm:flex-row sm:items-center sm:justify-between">
+        <p class="font-mono">© {{ year }} Fabien Lubin</p>
+        <NuxtLink to="/mentions-legales" class="transition-colors hover:text-accent-700">
+          Mentions légales
+        </NuxtLink>
       </div>
     </div>
   </footer>
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
-
-const mouseX = ref(0)
-const mouseY = ref(0)
-const footerRef = ref(null)
-
-const handleMouseMove = (e) => {
-  if (!footerRef.value) return
-  const rect = footerRef.value.getBoundingClientRect()
-  mouseX.value = e.clientX - rect.left
-  mouseY.value = e.clientY - rect.top
-}
-
-onMounted(() => {
-  if (footerRef.value) {
-    footerRef.value.addEventListener('mousemove', handleMouseMove)
-  }
-})
-
-onUnmounted(() => {
-  if (footerRef.value) {
-    footerRef.value.removeEventListener('mousemove', handleMouseMove)
-  }
-})
+// Calculé au rendu : évite une année figée dans le build.
+const year = new Date().getFullYear()
 
 const menuItems = [
   { name: 'Accueil', href: '/' },
-  { name: 'À propos', href: '/about' },
+  { name: 'Parcours', href: '/about' },
   { name: 'Projets', href: '/projects' },
-  { name: 'Contact', href: '/contact' }
+  { name: 'Contact', href: '/contact' },
 ]
 
 const socialLinks = [
-  {
-    name: 'GitHub',
-    href: 'https://github.com/mrcoolbay',
-    icon: 'mdi:github'
-  },
-  {
-    name: 'LinkedIn',
-    href: 'https://www.linkedin.com/in/fabien-lubin-695344291/',
-    icon: 'mdi:linkedin'
-  },
-  {
-    name: 'Instagram',
-    href: 'https://instagram.com/fablbn_',
-    icon: 'mdi:instagram'
-  }
+  { name: 'GitHub', href: 'https://github.com/mrcoolbay', icon: 'mdi:github' },
+  { name: 'LinkedIn', href: 'https://www.linkedin.com/in/fabien-lubin-695344291/', icon: 'mdi:linkedin' },
 ]
 </script>

@@ -1,177 +1,88 @@
 <template>
-  <main class="min-h-screen pt-10 px-4">
+  <main class="min-h-screen px-4 pt-10">
     <div class="container mx-auto max-w-6xl">
-      <!-- Import stylisé -->
-      <div class="mb-16 max-w-7xl mx-auto px-4">
-        <div class="flex items-baseline gap-4">
-          <h2 class="text-3xl font-bold bg-linear-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-            Projets
-          </h2>
-          <div class="font-mono text-gray-400 text-sm">
-            <span class="text-pink-600">import</span> { projects } <span class="text-pink-600">from</span> <span class="text-green-600">'./me'</span>
-          </div>
+      <PageHeader
+        title="Projets"
+        module="projects"
+        subtitle="Réalisations client et projets personnels. Chaque site est en ligne : le code et le rendu sont vérifiables."
+      />
+
+      <div class="grid gap-8 lg:grid-cols-2">
+        <ProjectCard
+          v-for="(project, index) in projects"
+          :key="project.domain"
+          v-bind="project"
+          :delay="index * 150"
+        />
+      </div>
+
+      <!-- Activité GitHub, servie par notre propre API pour rester dans la CSP -->
+      <div class="mt-16">
+        <h2 class="text-xl font-semibold text-ink">Activité GitHub</h2>
+        <div class="relative mt-4 mb-8 h-px w-full bg-zinc-200">
+          <div class="absolute inset-y-0 left-0 w-16 bg-accent-600" />
         </div>
-        <div class="mt-2 h-px w-full bg-linear-to-r from-blue-600/50 to-purple-600/50"/>
+        <GitHubPanel />
       </div>
 
-      <!-- Titre principal -->
-      <div class="space-y-8 mb-16">
-        <h1 class="text-[2.5rem] font-bold text-transparent bg-clip-text bg-linear-to-r from-blue-600 to-purple-600">
-          projects.map((project) => project.show());
-        </h1>
-      </div>
-
-      <!-- Grille des projects -->
-      <div class="grid md:grid-cols-2 gap-12">
-        <!-- MercuriaRP -->
-        <div
-            v-motion
-            :initial="{ opacity: 0, y: 20 }"
-            :enter="{ opacity: 1, y: 0 }"
-            :duration="1000"
-            class="group"
+      <!-- Passerelle vers la prestation : la page projets est le premier
+           endroit où un prospect atterrit depuis une recherche. -->
+      <section
+        v-motion
+        class="mt-16 rounded-xl border border-zinc-200 p-8"
+        :initial="{ opacity: 0, y: 20 }"
+        :enter="{ opacity: 1, y: 0, transition: { delay: 300 } }"
+      >
+        <h2 class="text-xl font-semibold text-ink">Un projet en tête ?</h2>
+        <p class="mt-3 max-w-2xl leading-relaxed text-ink-soft">
+          Je suis disponible en freelance pour la conception et la refonte de
+          sites vitrines, d'applications web et d'API. Devis gratuit après un
+          premier échange sur votre besoin.
+        </p>
+        <NuxtLink
+          to="/contact"
+          class="mt-6 inline-flex items-center gap-2 rounded-lg bg-ink px-5 py-3 font-mono text-sm text-white transition-colors hover:bg-accent-700"
         >
-          <div class="bg-[#1E1E1E] rounded-xl overflow-hidden">
-            <div class="flex items-center gap-2 px-4 py-3 bg-gray-800/50">
-              <div class="w-3 h-3 rounded-full bg-red-500"/>
-              <div class="w-3 h-3 rounded-full bg-yellow-500"/>
-              <div
-class="w-3 h-3 rounded-full bg-green-500 hover:bg-green-700 transition-colors"
-                   @click="openUrl('https://mercuriarp.fr')"
-              />
-              <span class="ml-2 text-sm text-gray-400">mercuriarp.fr</span>
-            </div>
-
-            <!-- Image du projet -->
-            <div class="relative aspect-video overflow-hidden">
-              <img
-                  src="/projects/mercuriarp.png"
-                  alt="MercuriaRP Preview"
-                  class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
-              >
-              <div class="absolute inset-0 bg-linear-to-t from-[#1E1E1E] to-transparent opacity-50"/>
-            </div>
-
-            <!-- Infos du projet -->
-            <div class="p-6 font-mono">
-              <div class="text-sm space-y-4 text-white">
-                <div>
-                  <span class="text-pink-400">const</span> <span class="text-blue-400">project</span> = {
-                  <div class="pl-4">
-                    <span class="text-purple-400">name:</span> <span class="text-green-400">"MercuriaRP"</span>,<br>
-                    <span class="text-purple-400">type:</span> <span class="text-green-400">"Solo Project"</span>,<br>
-                    <span class="text-purple-400">stack:</span> [<br>
-                    <div class="pl-4">
-                      <span class="text-orange-400">"Vue.js"</span>,<br>
-                      <span class="text-orange-400">"Nuxt"</span>,<br>
-                      <span class="text-orange-400">"TailwindCSS"</span>
-                    </div>
-                    ]
-                  </div>
-                  }
-                </div>
-
-                <div class="text-gray-400">
-                  // Site vitrine pour un serveur GTA RP,<br>
-                  // réalisé en solo avec une approche moderne
-                </div>
-              </div>
-
-              <!-- Lien vers le projet -->
-              <a
-                  href="https://mercuriarp.fr"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="inline-flex items-center gap-2 mt-6 text-blue-400 hover:text-blue-300 transition-colors"
-              >
-                <span>Visiter le site</span>
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                </svg>
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <!-- LPNet -->
-        <div
-            v-motion
-            :initial="{ opacity: 0, y: 20 }"
-            :enter="{ opacity: 1, y: 0, transition: { delay: 200 } }"
-            :duration="1000"
-            class="group"
-        >
-          <div class="bg-[#1E1E1E] rounded-xl overflow-hidden">
-            <div class="flex items-center gap-2 px-4 py-3 bg-gray-800/50">
-              <div class="w-3 h-3 rounded-full bg-red-500"/>
-              <div class="w-3 h-3 rounded-full bg-yellow-500"/>
-              <div
-class="w-3 h-3 rounded-full bg-green-500 hover:bg-green-700 transition-colors"
-              @click="openUrl('https://lpnet.fr')"/>
-              <span class="ml-2 text-sm text-gray-400">lpnet.fr</span>
-            </div>
-
-            <!-- Image du projet -->
-            <div class="relative aspect-video overflow-hidden">
-              <img
-                  src="/projects/lpnet.png"
-                  alt="LPNet Preview"
-                  class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
-              >
-              <div class="absolute inset-0 bg-linear-to-t from-[#1E1E1E] to-transparent opacity-50"/>
-            </div>
-
-            <!-- Infos du projet -->
-            <div class="p-6 font-mono">
-              <div class="text-sm space-y-4 text-white">
-                <div>
-                  <span class="text-pink-400">const</span> <span class="text-blue-400">project</span> = {
-                  <div class="pl-4">
-                    <span class="text-purple-400">name:</span> <span class="text-green-400">"LPNet"</span>,<br>
-                    <span class="text-purple-400">type:</span> <span class="text-green-400">"Collaboration"</span>,<br>
-                    <span class="text-purple-400">stack:</span> [<br>
-                    <div class="pl-4">
-                      <span class="text-orange-400">"Vue.js"</span>,<br>
-                      <span class="text-orange-400">"Nuxt"</span>,<br>
-                      <span class="text-orange-400">"TailwindCSS"</span>
-                    </div>
-                    ]
-                  </div>
-                  }
-                </div>
-
-                <div class="text-gray-400">
-                  // Site vitrine pour notre entreprise,<br>
-                  // développé en collaboration
-                </div>
-              </div>
-
-              <!-- Lien vers le projet -->
-              <a
-                  href="https://lpnet.fr"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="inline-flex items-center gap-2 mt-6 text-blue-400 hover:text-blue-300 transition-colors"
-              >
-                <span>Visiter le site</span>
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                </svg>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
+          <span>Discutons de votre projet</span>
+          <Icon name="heroicons:arrow-right" class="h-4 w-4" />
+        </NuxtLink>
+      </section>
     </div>
   </main>
 </template>
 
-
 <script setup>
+useHead({ title: 'Projets' })
 
-function openUrl(url) {
-  // `noopener` empêche la page ouverte d'accéder à window.opener (reverse tabnabbing).
-  window.open(url, '_blank', 'noopener,noreferrer')
-}
-
+/**
+ * Les stacks listées sont celles réellement servies par chaque site
+ * (signatures `_nuxt/`, en-têtes d'hébergeur), pas des déclarations d'intention.
+ */
+const projects = [
+  {
+    title: "L'Univers — Sedan",
+    type: 'Client · Site vitrine',
+    domain: 'lunivers-sedan.fr',
+    description:
+      "Site vitrine du bar L'Univers, institution sedanaise depuis 1932. Contrôle "
+      + "d'âge à l'entrée, carte des boissons, galerie et page de localisation avec "
+      + 'horaires. Visuels servis en WebP avec variantes responsive, déploiement sur '
+      + "l'edge parisien de Vercel.",
+    stack: ['Nuxt', 'Vue 3', 'Vercel'],
+    image: '/projects/lunivers-sedan.webp',
+    href: 'https://www.lunivers-sedan.fr',
+  },
+  {
+    title: 'fabienlubin.fr',
+    type: 'Projet personnel · Code ouvert',
+    domain: 'github.com/mrcoolbay',
+    description:
+      'Ce site. Endpoint de contact durci — validation stricte, limitation de débit, '
+      + "rejet des injections d'en-têtes SMTP — et campagne de tests de sécurité "
+      + 'rejouable en une commande. Zéro vulnérabilité déclarée sur les dépendances.',
+    stack: ['Nuxt 4', 'Tailwind 4', 'Nitro', 'Zod'],
+    href: 'https://github.com/MrCoolBay/newportfolio',
+    linkLabel: 'Voir le code',
+  },
+]
 </script>

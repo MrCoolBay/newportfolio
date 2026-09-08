@@ -4,3 +4,33 @@
    formulaire de contact. `typography` et `aspect-ratio` ont été retirés
    (aucune classe `prose` dans le projet, `aspect-*` est natif en Tailwind 4). */
 @plugin "@tailwindcss/forms";
+
+/**
+ * Jetons de la charte — point d'entrée unique.
+ *
+ * `accent` est défini ici et nulle part ailleurs : changer la couleur
+ * d'accentuation du site est une modification d'une ligne. Le violet précédent
+ * était éparpillé sur 31 occurrences dans les composants, ce qui rendait tout
+ * changement de charte pénible et incomplet.
+ *
+ * Utilisation : text-accent-700 pour du texte courant sur fond clair
+ * (accent-600 n'atteint que 3,19:1 sur blanc), accent-400/500 sur les fonds
+ * sombres, accent-600 réservé aux aplats, icônes et gros titres.
+ */
+@theme {
+  --color-accent-300: var(--color-amber-300);
+  --color-accent-400: var(--color-amber-400);
+  --color-accent-500: var(--color-amber-500);
+  --color-accent-600: var(--color-amber-600);
+  --color-accent-700: var(--color-amber-700);
+  --color-accent-800: var(--color-amber-800);
+
+  /* Encre des titres et du corps de texte : graphite, pas gris bleuté. */
+  --color-ink: var(--color-zinc-900);
+  --color-ink-soft: var(--color-zinc-600);
+  --color-ink-muted: var(--color-zinc-500);
+
+  /* Fond des blocs « terminal », identité visuelle du site. */
+  --color-shell: #1e1e1e;
+  --color-shell-bar: #1a1a1a;
+}
