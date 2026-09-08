@@ -58,7 +58,7 @@ useSchemaOrg([
       + 'mobile React Native. Alternant en cyberdéfense et freelance à Reims.',
     image: `${siteUrl}/og-image.png`,
     url: siteUrl,
-    email: 'contact@fabienlubin.fr',
+    email: 'bonjour@fabienlubin.fr',
     knowsLanguage: ['fr-FR', 'en'],
     knowsAbout: [
       'Vue.js', 'Nuxt', 'TypeScript', 'React Native', 'Node.js',
@@ -109,7 +109,7 @@ useSchemaOrg([
       'Développement de sites vitrines, d\'applications web et mobiles et d\'API. '
       + 'Conteneurisation, intégration continue et durcissement applicatif.',
     'url': siteUrl,
-    'email': 'contact@fabienlubin.fr',
+    'email': 'bonjour@fabienlubin.fr',
     'image': `${siteUrl}/og-image.png`,
     'priceRange': 'Sur devis',
     'identifier': { '@type': 'PropertyValue', 'name': 'SIREN', 'value': '988265195' },

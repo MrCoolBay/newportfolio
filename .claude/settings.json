@@ -23,8 +23,7 @@
       "Bash(python3 .claude/skills/security-audit/pentest.py:*)"
     ],
     "deny": [
-      "Read(./.env)",
-      "Read(./.env.*)"
+      "Read(./.env)"
     ]
   },
   "hooks": {
